@@ -15,16 +15,16 @@
   <img width="460" height="300" src="https://user-images.githubusercontent.com/40704006/137034001-bb740f9e-ea5a-4bc6-b16e-0f1d14c4aba2.gif">
 </p>
 ### Sprint 1 (Ends October 20, 2021)
-- [X] Create GitHub Repo
-- [X] Create README
-- [X] Create Admin class
-- [ ] Create User class
-- [X] Create Transaction class
-- [X] Create Request class
-- [X] Create BankAccount class
-- [X] Finalize attribute names for all classes
-- [X] Finalize method names for all classes
-- [X] Finalize constructors for all classes
+- [X] Create GitHub Repo  
+- [X] Create README  
+- [X] Create Admin class  
+- [ ] Create User class  
+- [X] Create Transaction class  
+- [X] Create Request class  
+- [X] Create BankAccount class  
+- [X] Finalize attribute names for all classes  
+- [X] Finalize method names for all classes  
+- [X] Finalize constructors for all classes  
 
 ### Software and Team Management Tools
 - *IntelliJ* (programming)
