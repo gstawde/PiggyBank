@@ -19,7 +19,7 @@
 - [x] Create GitHub Repo  
 - [x] Create README  
 - [x] Create Admin class  
-- [ ] Create User class  
+- [x] Create User class  
 - [x] Create Transaction class  
 - [x] Create Request class  
 - [x] Create BankAccount class  
