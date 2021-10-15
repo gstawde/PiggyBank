@@ -2,7 +2,7 @@
  * Transaction class contains the information required at the macro level for a transaction to take place
  * (the users that are the sender and receiver, as well as the amount to be transferred).
  */
-public class Transaction {
+public class Transaction implements Comparable<Transaction> {
 
     // ATTRIBUTES
     private User sender;
@@ -49,6 +49,18 @@ public class Transaction {
      */
     public static void main(String[] args) {
 	// write your code here
+    }
+
+    @Override
+    public int compareTo(Transaction t) {
+        // Check if they are the same transaction:
+        if (this.sender == t.getSender() && this.receiver == t.getReceiver() && this.amount == t.getAmount()) {
+            return 0;
+        } else if (this.sender == t.getSender() && this.receiver == t.getReceiver() && this.amount != t.getAmount()) {
+            return -1;
+        } else {
+            return 1;
+        }
     }
 }
 // © Oct 12, 2021 | Gargi Tawde | gargi.tawde01@gmail.com
