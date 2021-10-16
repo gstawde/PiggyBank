@@ -1,8 +1,8 @@
 public class BankAccount implements Comparable<BankAccount>
 {
-    String firstName;
-    String lastName;
-    double balance;
+    private String firstName;
+    private String lastName;
+    private double balance;
 
     public BankAccount(String first, String last, double balance)
     {
