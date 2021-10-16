@@ -1,4 +1,4 @@
-public class BankAccount
+public class BankAccount implements Comparable<BankAccount>
 {
     String firstName;
     String lastName;
@@ -27,6 +27,22 @@ public class BankAccount
     public void updateBalance(double amount)
     {
         balance += amount;
+    }
+
+    @Override
+    public int compareTo(BankAccount o) {
+        if(!this.firstName.equals(o.firstName)){
+            return this.firstName.compareTo(o.firstName);
+        }else if(!this.lastName.equals(o.lastName)){
+            return this.lastName.compareTo(o.lastName);
+        }else{
+            return (int)Math.signum(o.balance - this.balance);
+        }
+    }
+    @Override
+    public boolean equals(Object o) {
+        BankAccount u = (BankAccount)o;
+        return this.compareTo(u) == 0;
     }
 }
 
