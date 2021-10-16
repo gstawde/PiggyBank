@@ -16,7 +16,7 @@ public class Admin {
     }
 
     public User authenticateUser(String username, String password){
-        return this.usernameToUser.containsKey(username) && this.usernameToUser.get(username).password.equals(password)
+        return this.usernameToUser.containsKey(username) && this.usernameToUser.get(username).getPassword().equals(password)
                 ? this.usernameToUser.get(username)
                 : null;
     }
