@@ -1,8 +1,8 @@
 
 public class Request implements Comparable<Request>{
-    Double  amount;
-    User requester;
-    User fulfiller;
+    private Double  amount;
+    private User requester;
+    private User fulfiller;
 
     public Request(double amount, User requester, User fulfiller){
         this.amount    =    amount;
