@@ -27,9 +27,6 @@
 - [x] Finalize method names for all classes  
 - [x] Finalize constructors for all classes
 - [x] Create and carry out JUnit tests for all classes
-<p align="center">
-<img width="683" alt="image" src="https://user-images.githubusercontent.com/40704006/137835231-5ec0ff94-8cd6-495d-afc2-6b68d9875b2f.png">
-</p>
 
 ### Software and Team Management Tools
 - *IntelliJ* (programming)
