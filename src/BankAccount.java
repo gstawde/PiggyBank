@@ -24,10 +24,9 @@ public class BankAccount implements Comparable<BankAccount>
         return balance;
     }
 
-    public double updateBalance(double amount)
+    public void updateBalance(double amount)
     {
         balance += amount;
-        return this.balance;
     }
 
     @Override
@@ -77,4 +76,4 @@ public class BankAccount implements Comparable<BankAccount>
         return false;
     }
 }
-
+//Jun Wu
