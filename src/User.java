@@ -28,10 +28,28 @@ public class User implements Comparable<User>{
      * @param amount
      * @param recipient
      */
-    public void payUser(double amount, User recipient) {
+    public boolean payUser(double amount, User recipient) {
+        if(this.bankAccount.getBalance() < amount){
+            return false;
+        }
         recipient.bankAccount.updateBalance(amount);
         this.bankAccount.updateBalance((-1)*amount);
         transactionHistory.add(new Transaction(recipient,this,amount));
+        recipient.transactionHistory.add(new Transaction(recipient,this,amount));
+        return true;
+    }
+
+    /***
+     * Fulfill a request and delete it from your list of requests
+     * @param request
+     * @return
+     */
+    public boolean fulfillRequest(Request request){
+        if(payUser(request.getAmount(), request.getRequester())){
+            return this.requests.remove(request);
+        }else{
+            return false;
+        }
     }
 
     /***
