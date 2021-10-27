@@ -31,17 +31,19 @@ public class BankAccountTester
         assertEquals(1000, account1.getBalance(), "Should be 1000");
     }
 
-    /*@Test
+    @Test
     public void updateBalanceDepositTest()
     {
-        assertEquals(1500, account1.updateBalance(500), "Should be 1500");
+        account1.updateBalance(500);
+        assertEquals(1500, account1.getBalance(), "Should be 1500");
     }
 
     @Test
     public void updateBalanceWithdrawalTest()
     {
-        assertEquals(500, account1.updateBalance(-500), "Should be 500");
-    }*/
+        account1.updateBalance(-500);
+        assertEquals(500, account1.getBalance(), "Should be 500");
+    }
 
     @Test
     public void smallerObjFirstCompareToTest()
