@@ -4,14 +4,27 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UserTester{
+
     @Test
-    public void payUserTest(){
+    public void payUserTestWithSufficientBalance(){
         User ab = new User("ab", "123", new BankAccount("a","b",100));
         User cd = new User("cd", "123", new BankAccount("c","d",100));
 
-        ab.payUser(50,cd);
+        assertTrue(ab.payUser(50,cd),"Expected True");
         assertEquals(150,cd.getBankAccount().getBalance(), 0.001);
         assertEquals(50, ab.getBankAccount().getBalance(), 0.001);
+
+    }
+
+    @Test
+    public void payUserTestWithInsufficientBalance(){
+        User ab = new User("ab", "123", new BankAccount("a","b",100));
+        User cd = new User("cd", "123", new BankAccount("c","d",100));
+
+        assertFalse(ab.payUser(500,cd),"Expected False");
+        assertEquals(100,cd.getBankAccount().getBalance(), 0.001);
+        assertEquals(100, ab.getBankAccount().getBalance(), 0.001);
+
     }
 
     @Test
@@ -23,6 +36,15 @@ public class UserTester{
         Request req = new Request(50,ab,cd);
         assertTrue(req.equals(cd.getRequests().get(0)), "should return true" );
 
+    }
+
+    @Test
+    public void fulfillRequestTest(){
+        User ab = new User("ab", "123", new BankAccount("a","b",100));
+        User cd = new User("cd", "123", new BankAccount("c","d",100));
+        ab.requestFromUser(50,cd);
+        assertTrue(cd.fulfillRequest(cd.getRequests().get(0)), "should return true" );
+        assertTrue(cd.getRequests().isEmpty(), "Requests should be empty");
     }
 
     @Test
