@@ -1,5 +1,3 @@
-package UnitTests;
-
 import org.junit.*;
 import org.junit.jupiter.api.BeforeEach;
 
