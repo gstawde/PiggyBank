@@ -1,6 +1,7 @@
+import Model.Admin;
+import Model.BankAccount;
+import Model.User;
 import org.junit.*;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.HashMap;
@@ -45,7 +46,7 @@ public class AdminTester {
 
     @Test
     public void validAuthenticateMethodTesting(){
-        assertNotNull(a.authenticateUser("sa01","123"), "Should return a non null User");
+        assertNotNull(a.authenticateUser("sa01","123"), "Should return a non null Model.User");
     }
     @Test
     public void invalidUsernameAuthenticateMethodTesting(){

@@ -18,11 +18,11 @@
 ### Sprint 1 (Ends October 20, 2021)  
 - [x] Create GitHub Repo  
 - [x] Create README  
-- [x] Create Admin class  
-- [x] Create User class  
-- [x] Create Transaction class  
-- [x] Create Request class  
-- [x] Create BankAccount class  
+- [x] Create Model.Admin class  
+- [x] Create Model.User class  
+- [x] Create Model.Transaction class  
+- [x] Create Model.Request class  
+- [x] Create Model.BankAccount class  
 - [x] Finalize attribute names for all classes  
 - [x] Finalize method names for all classes  
 - [x] Finalize constructors for all classes

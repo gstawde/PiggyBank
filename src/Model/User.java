@@ -1,7 +1,9 @@
+package Model;
+
 import java.util.ArrayList;
 
 /***
- *The User class defines an individual user of the app and stores User data
+ *The Model.User class defines an individual user of the app and stores Model.User data
  */
 
 public class User implements Comparable<User>{
@@ -24,7 +26,7 @@ public class User implements Comparable<User>{
     //Methods
 
     /***
-     * Pays User recipient the amount of money
+     * Pays Model.User recipient the amount of money
      * @param amount
      * @param recipient
      */
@@ -53,7 +55,7 @@ public class User implements Comparable<User>{
     }
 
     /***
-     * Requests from User sender the amount of money
+     * Requests from Model.User sender the amount of money
      * @param amount
      * @param sender
      */
@@ -84,7 +86,7 @@ public class User implements Comparable<User>{
     public BankAccount getBankAccount(){ return bankAccount;}
 
     /***
-     * getter for Transaction History
+     * getter for Model.Transaction History
      * @return transactionHistory
      */
     public ArrayList<Transaction> getTransactionHistory() {

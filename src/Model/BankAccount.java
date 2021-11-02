@@ -1,6 +1,8 @@
+package Model;
+
 /**
- * The BankAccount represent the bank amount of the user
- * A BankAccount contains a first name, a last name and the balance
+ * The Model.BankAccount represent the bank amount of the user
+ * A Model.BankAccount contains a first name, a last name and the balance
  */
 public class BankAccount implements Comparable<BankAccount>
 {
@@ -35,7 +37,7 @@ public class BankAccount implements Comparable<BankAccount>
 
     /**
      * This method gets the balance of the account
-     * @return the balance of this BankAccount
+     * @return the balance of this Model.BankAccount
      */
     public double getBalance()
     {
@@ -43,7 +45,7 @@ public class BankAccount implements Comparable<BankAccount>
     }
 
     /**
-     * This method add a double value to the balance of this BankAccount
+     * This method add a double value to the balance of this Model.BankAccount
      * @param amount
      */
     public void updateBalance(double amount)
@@ -52,11 +54,11 @@ public class BankAccount implements Comparable<BankAccount>
     }
 
     /**
-     * This method compare two BankAccount object
+     * This method compare two Model.BankAccount object
      * @param o
-     * @return -1 if this BankAccount is smaller
-     *          1 if this BankAccount is larger
-     *          0 if two BankAccount is the same
+     * @return -1 if this Model.BankAccount is smaller
+     *          1 if this Model.BankAccount is larger
+     *          0 if two Model.BankAccount is the same
      */
     @Override
     public int compareTo(BankAccount o) {
@@ -97,10 +99,10 @@ public class BankAccount implements Comparable<BankAccount>
     }
 
     /**
-     * This method check if two BankAccount is the same or not
+     * This method check if two Model.BankAccount is the same or not
      * @param o
-     * @return true if two BankAccount is the same
-     *         false if two BankAccount is different
+     * @return true if two Model.BankAccount is the same
+     *         false if two Model.BankAccount is different
      */
     @Override
     public boolean equals(Object o)
