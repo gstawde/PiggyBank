@@ -1,4 +1,8 @@
 
+import Model.BankAccount;
+import Model.Request;
+import Model.Transaction;
+import Model.User;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
