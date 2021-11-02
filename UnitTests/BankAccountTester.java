@@ -36,13 +36,15 @@ public class BankAccountTester
     @Test
     public void updateBalanceDepositTest()
     {
-        assertEquals(1500, account1.updateBalance(500), "Should be 1500");
+        account1.updateBalance(500);
+        assertEquals(1500, account1.getBalance(), "Should be 1500");
     }
 
     @Test
     public void updateBalanceWithdrawalTest()
     {
-        assertEquals(500, account1.updateBalance(-500), "Should be 500");
+        account1.updateBalance(-500);
+        assertEquals(500, account1.getBalance(), "Should be 500");
     }
 
     @Test
@@ -80,3 +82,4 @@ public class BankAccountTester
         assertFalse(account1.equals(account2), "Should be false");
     }
 }
+//Jun Wu

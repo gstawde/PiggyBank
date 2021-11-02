@@ -1,3 +1,7 @@
+/**
+ * The BankAccount represent the bank amount of the user
+ * A BankAccount contains a first name, a last name and the balance
+ */
 public class BankAccount implements Comparable<BankAccount>
 {
     private String firstName;
@@ -11,25 +15,49 @@ public class BankAccount implements Comparable<BankAccount>
         this.balance = balance;
     }
 
+    /**
+     * This method gets the first name of the account holder
+     * @return a string contains the first name of the account holder
+     */
     public String getFirstName()
     {
         return firstName;
     }
+
+    /**
+     * This method gets the last name of the account holder
+     * @return a string contains the last name of the account holder
+     */
     public String getLastName()
     {
         return lastName;
     }
+
+    /**
+     * This method gets the balance of the account
+     * @return the balance of this BankAccount
+     */
     public double getBalance()
     {
         return balance;
     }
 
-    public double updateBalance(double amount)
+    /**
+     * This method add a double value to the balance of this BankAccount
+     * @param amount
+     */
+    public void updateBalance(double amount)
     {
         balance += amount;
-        return this.balance;
     }
 
+    /**
+     * This method compare two BankAccount object
+     * @param o
+     * @return -1 if this BankAccount is smaller
+     *          1 if this BankAccount is larger
+     *          0 if two BankAccount is the same
+     */
     @Override
     public int compareTo(BankAccount o) {
         if(this.firstName.compareTo(o.firstName) < 0)
@@ -67,6 +95,13 @@ public class BankAccount implements Comparable<BankAccount>
                 }
         }
     }
+
+    /**
+     * This method check if two BankAccount is the same or not
+     * @param o
+     * @return true if two BankAccount is the same
+     *         false if two BankAccount is different
+     */
     @Override
     public boolean equals(Object o)
     {
@@ -77,4 +112,4 @@ public class BankAccount implements Comparable<BankAccount>
         return false;
     }
 }
-
+//Jun Wu
