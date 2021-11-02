@@ -1,3 +1,5 @@
+package Model;
+
 /***
  * This the request object for when people request money from other users
  */
