@@ -20,7 +20,7 @@ public class View extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public static void main(String[] a){
+    public static void main(String[] a) {
         View v = new View("s");
     }
 
