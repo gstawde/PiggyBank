@@ -26,6 +26,8 @@ public class HomePageView extends JFrame{
         JScrollPane sp = new JScrollPane(table);
         this.add(sp);
 
+
+
         this.setSize(500, 500);
         this.setLayout(new FlowLayout());
         this.setVisible(true);
@@ -33,11 +35,11 @@ public class HomePageView extends JFrame{
 
     }
 
-    public static void main(String[] a){
+    /*public static void main(String[] a){
         User u = new User("s", "a", new BankAccount("sm","a",500.00));
         User b = new User("b","a", new BankAccount("b","a",60));
         u.payUser(50,b);
         b.payUser(20,u);
         HomePageView v = new HomePageView(u);
-    }
+    }*/
 }
