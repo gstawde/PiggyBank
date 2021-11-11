@@ -7,6 +7,7 @@
 **TEAM LEADER:** Gargi Tawde  
 **OTHER DEVELOPERS:** Chint Patel, Shivam Amin, and Jun Wu
 
+---
 ### Product Overview & Description 
 **Idea:** *Money transfer app*  
 **Type of app:** *Java Swing*  
@@ -14,6 +15,14 @@
 <p align="center">
   <img width="460" height="300" src="https://user-images.githubusercontent.com/40704006/137034001-bb740f9e-ea5a-4bc6-b16e-0f1d14c4aba2.gif">
 </p>  
+
+### Software and Team Management Tools
+- *IntelliJ* (programming)
+- *Adobe XD* (for storyboarding app)
+- *Jira* (scrumboarding; tracking progress)
+- *Procreate* (Logo Design)
+- *GitHub* (Hosts project and assists with VC)
+---
 
 ### Sprint 1 (Ends October 20, 2021)  
 - [x] Create GitHub Repo  
@@ -34,11 +43,11 @@
 - [x] Decide whether to build pages and features individually or as a group
 - [x] Delegate pages for Sprint 3
 - [x] Complete implementation of *Iterator Design Pattern* on home page
+### Sprint 3 (Ends November 21, 2021)  
+- [ ] Finish backend for HomePage
+- [ ] Finish backend for Login/Sign Up
+- [ ] Finish backend for Settings
+- [ ] Finish backend for Transfer/Request
+- [ ] Start on and/or finish establishing universal basic UI template
 
-### Software and Team Management Tools
-- *IntelliJ* (programming)
-- *Adobe XD* (for storyboarding app)
-- *Jira* (scrumboarding; tracking progress)
-- *Procreate* (Logo Design)
-- *GitHub* (Hosts project and assists with VC)
 
