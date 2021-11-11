@@ -27,6 +27,13 @@
 - [x] Finalize method names for all classes  
 - [x] Finalize constructors for all classes
 - [x] Create and carry out JUnit tests for all classes
+### Sprint 2 (Ends November 07, 2021)  
+- [x] Decide first design pattern for implementation
+- [x] Ensure class design is complete (as best we can assure before building pages)
+- [x] Make sure documentation for all classes is complete
+- [x] Decide whether to build pages and features individually or as a group
+- [x] Delegate pages for Sprint 3
+- [x] Complete implementation of *Iterator Design Pattern* on home page
 
 ### Software and Team Management Tools
 - *IntelliJ* (programming)

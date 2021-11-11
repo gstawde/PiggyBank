@@ -3,13 +3,14 @@ package View;
 import javax.swing.*;
 import java.awt.*;
 
+
 import Model.BankAccount;
 import Model.User;
 
-public class View extends JFrame{
+public class HomePageView extends JFrame{
     JTable table;
 
-    public View(String s, User user){
+    public HomePageView(User user){
 
         String[] columnNames = {"Receiver Name",
                 "Fulfiller Name",
@@ -25,6 +26,8 @@ public class View extends JFrame{
         JScrollPane sp = new JScrollPane(table);
         this.add(sp);
 
+
+
         this.setSize(500, 500);
         this.setLayout(new FlowLayout());
         this.setVisible(true);
@@ -32,11 +35,11 @@ public class View extends JFrame{
 
     }
 
-    public static void main(String[] a){
+    /*public static void main(String[] a){
         User u = new User("s", "a", new BankAccount("sm","a",500.00));
         User b = new User("b","a", new BankAccount("b","a",60));
         u.payUser(50,b);
         b.payUser(20,u);
-        View v = new View("s", u);
-    }
+        HomePageView v = new HomePageView(u);
+    }*/
 }
