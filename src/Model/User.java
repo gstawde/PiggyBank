@@ -71,12 +71,30 @@ public class User implements Comparable<User>{
         return username;
     }
 
+    /**
+     * setter for Username
+     * @param name
+     */
+    public void setUsername(String name)
+    {
+        this.username = name;
+    }
+
     /***
      * getter for Password
      * @return password
      */
     public String getPassword(){
         return password;
+    }
+
+    /**
+     * setter for password
+     * @param password
+     */
+    public void setPassword(String password)
+    {
+        this.password = password;
     }
 
     /***
