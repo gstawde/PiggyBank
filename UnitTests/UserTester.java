@@ -66,9 +66,23 @@ public class UserTester{
     }
 
     @Test
+    public void setUsernameTest() {
+        User ab = new User("ab", "123", new BankAccount("a","b",100));
+        ab.setUsername("cd");
+        assertTrue(ab.getUsername().equals("cd"), "should return true");
+    }
+
+    @Test
     public void getPasswordTest() {
         User ab = new User("ab", "123", new BankAccount("a","b",100));
         assertTrue(ab.getPassword().equals("123"), "should return true");
+    }
+
+    @Test
+    public void setPasswordTest() {
+        User ab = new User("ab", "123", new BankAccount("a","b",100));
+        ab.setPassword("321");
+        assertTrue(ab.getPassword().equals("321"), "should return true");
     }
 
     @Test
