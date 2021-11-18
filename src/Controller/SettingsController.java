@@ -21,7 +21,9 @@ public class SettingsController {
                 }
                 else
                 {
+                    admin.deleteUser(user.getUsername());
                     user.setUsername(newName);
+                    admin.addUser(user);
                     view.updateNameSuccess.setVisible(true);
                     view.updateNameFail.setVisible(false);
                 }
