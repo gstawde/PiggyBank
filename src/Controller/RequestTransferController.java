@@ -5,27 +5,102 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import Model.*;
 import View.RequestTransferView;
 
 public class RequestTransferController {
-    public RequestTransferController(Admin admin, User user){
-        RequestTransferView RTview = new RequestTransferView();
-        RTview.request.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                RTview.success.setVisible(false);
-                RTview.invalidUserName.setVisible(false);
-                RTview.invalidAmount.setVisible(false);
-                RTview.insufficientFunds.setVisible(false);
 
+     BlockingQueue<Message> queue;
+     Admin admin;
+     User user;
+     RequestTransferView RTview;
+
+    public RequestTransferController(BlockingQueue<Message> queue, Admin admin, User user, RequestTransferView RTview){
+        this.queue = queue;
+        this.admin = admin;
+        this.user = user;
+        this.RTview = RTview;
+
+//        RequestTransferView RTview = new RequestTransferView(queue);
+//        RTview.request.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                RTview.success.setVisible(false);
+//                RTview.invalidUserName.setVisible(false);
+//                RTview.invalidAmount.setVisible(false);
+//                RTview.insufficientFunds.setVisible(false);
+//
+//                HashMap<String, User> users = admin.getUsernameToUser();
+//                String username = RTview.username.getText();
+//                double amount;
+//                try{
+//                    amount = Double.parseDouble(RTview.amount.getText());
+//                    if(users.containsKey(username)) {
+//                        user.requestFromUser(amount, users.get(username));
+//                        RTview.success.setVisible(true);
+//                    }
+//                    else
+//                        RTview.invalidUserName.setVisible(true);
+//                } catch (NumberFormatException ex) {
+//                    RTview.invalidAmount.setVisible(true);
+//                }
+//
+//            }
+//        });
+//
+//        RTview.transfer.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                RTview.success.setVisible(false);
+//                RTview.invalidUserName.setVisible(false);
+//                RTview.invalidAmount.setVisible(false);
+//                RTview.insufficientFunds.setVisible(false);
+//
+//                HashMap<String, User> users = admin.getUsernameToUser();
+//                String username = RTview.username.getText();
+//                double amount;
+//                try {
+//                    amount = Double.parseDouble(RTview.amount.getText());
+//                    if(users.containsKey(username)){
+//                        if(user.payUser(amount,users.get(username)))
+//                            RTview.success.setVisible(true);
+//                        else
+//                            RTview.insufficientFunds.setVisible(true);
+//                    }
+//                    else
+//                        RTview.invalidUserName.setVisible(true);
+//                } catch (NumberFormatException ex){
+//                    RTview.invalidAmount.setVisible(true);
+//                }
+//            }
+//        });
+    }
+
+    public void mainLoop() {
+        while(RTview.isDisplayable()){
+            Message message = null;
+            try {
+                message = queue.take();
+            } catch (InterruptedException exception) {
+                // do nothing
+            }
+            RTview.success.setVisible(false);
+            RTview.invalidUserName.setVisible(false);
+            RTview.invalidAmount.setVisible(false);
+            RTview.insufficientFunds.setVisible(false);
+
+            //perfom request
+            if(message.getClass() == RequestMessage.class) {
+                RequestMessage request = (RequestMessage) message;
                 HashMap<String, User> users = admin.getUsernameToUser();
-                String username = RTview.username.getText();
+                String username = request.getFulfiller();
                 double amount;
                 try{
-                    amount = Double.parseDouble(RTview.amount.getText());
-                    if(users.containsKey(username)) {
+                    amount = Double.parseDouble(request.getAmount());
+                    if(users.containsKey(username) && !username.equals(user.getUsername())) {
                         user.requestFromUser(amount, users.get(username));
                         RTview.success.setVisible(true);
                     }
@@ -34,24 +109,16 @@ public class RequestTransferController {
                 } catch (NumberFormatException ex) {
                     RTview.invalidAmount.setVisible(true);
                 }
-
             }
-        });
-
-        RTview.transfer.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                RTview.success.setVisible(false);
-                RTview.invalidUserName.setVisible(false);
-                RTview.invalidAmount.setVisible(false);
-                RTview.insufficientFunds.setVisible(false);
-
+            //perform transfer
+            else if(message.getClass() == TransferMessage.class){
+                TransferMessage transfer = (TransferMessage) message;
                 HashMap<String, User> users = admin.getUsernameToUser();
-                String username = RTview.username.getText();
+                String username = transfer.getRecipient();
                 double amount;
                 try {
-                    amount = Double.parseDouble(RTview.amount.getText());
-                    if(users.containsKey(username)){
+                    amount = Double.parseDouble(transfer.getAmount());
+                    if(users.containsKey(username) && !username.equals(user.getUsername())){
                         if(user.payUser(amount,users.get(username)))
                             RTview.success.setVisible(true);
                         else
@@ -63,18 +130,22 @@ public class RequestTransferController {
                     RTview.invalidAmount.setVisible(true);
                 }
             }
-        });
+        }
     }
+
 
     public static void main(String[] args) {
         Admin admin = new Admin();
-        User u = new User("s", "a", new BankAccount("sm","a",500.00));
+        User u = new User("u", "a", new BankAccount("sm","a",500.00));
         User b = new User("b","a", new BankAccount("b","a",60));
         u.payUser(50,b);
         b.payUser(20,u);
         admin.addUser(u);
         admin.addUser(b);
-        new RequestTransferController(admin, u);
+        BlockingQueue<Message> queue = new LinkedBlockingQueue<>();
+        RequestTransferView RTview = new RequestTransferView(queue);
+        RequestTransferController RTcontroller = new RequestTransferController(queue,admin,u,RTview);
+        RTcontroller.mainLoop();
     }
 
 }
