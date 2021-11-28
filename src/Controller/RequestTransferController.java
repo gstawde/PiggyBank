@@ -15,6 +15,11 @@ public class RequestTransferController {
         RTview.request.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                RTview.success.setVisible(false);
+                RTview.invalidUserName.setVisible(false);
+                RTview.invalidAmount.setVisible(false);
+                RTview.insufficientFunds.setVisible(false);
+
                 HashMap<String, User> users = admin.getUsernameToUser();
                 String username = RTview.username.getText();
                 double amount;
@@ -23,22 +28,11 @@ public class RequestTransferController {
                     if(users.containsKey(username)) {
                         user.requestFromUser(amount, users.get(username));
                         RTview.success.setVisible(true);
-                        RTview.invalidUserName.setVisible(false);
-                        RTview.invalidAmount.setVisible(false);
-                        RTview.insufficientFunds.setVisible(false);
                     }
-                    else{
-                        RTview.success.setVisible(false);
+                    else
                         RTview.invalidUserName.setVisible(true);
-                        RTview.invalidAmount.setVisible(false);
-                        RTview.insufficientFunds.setVisible(false);
-                    }
-                } catch (NumberFormatException ex){
-                    RTview.success.setVisible(false);
-                    RTview.invalidUserName.setVisible(false);
+                } catch (NumberFormatException ex) {
                     RTview.invalidAmount.setVisible(true);
-                    RTview.insufficientFunds.setVisible(false);
-
                 }
 
             }
@@ -47,36 +41,26 @@ public class RequestTransferController {
         RTview.transfer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                RTview.success.setVisible(false);
+                RTview.invalidUserName.setVisible(false);
+                RTview.invalidAmount.setVisible(false);
+                RTview.insufficientFunds.setVisible(false);
+
                 HashMap<String, User> users = admin.getUsernameToUser();
                 String username = RTview.username.getText();
                 double amount;
                 try {
                     amount = Double.parseDouble(RTview.amount.getText());
                     if(users.containsKey(username)){
-                        if(user.payUser(amount,users.get(username))){
+                        if(user.payUser(amount,users.get(username)))
                             RTview.success.setVisible(true);
-                            RTview.invalidUserName.setVisible(false);
-                            RTview.invalidAmount.setVisible(false);
-                            RTview.insufficientFunds.setVisible(false);
-                        }
-                        else{
-                            RTview.success.setVisible(false);
-                            RTview.invalidUserName.setVisible(false);
-                            RTview.invalidAmount.setVisible(false);
+                        else
                             RTview.insufficientFunds.setVisible(true);
-                        }
                     }
-                    else {
-                        RTview.success.setVisible(false);
+                    else
                         RTview.invalidUserName.setVisible(true);
-                        RTview.invalidAmount.setVisible(false);
-                        RTview.insufficientFunds.setVisible(false);
-                    }
                 } catch (NumberFormatException ex){
-                    RTview.success.setVisible(false);
-                    RTview.invalidUserName.setVisible(false);
                     RTview.invalidAmount.setVisible(true);
-                    RTview.insufficientFunds.setVisible(false);
                 }
             }
         });
@@ -94,3 +78,4 @@ public class RequestTransferController {
     }
 
 }
+//Chint Patel | patelchint2002@gmail.com
