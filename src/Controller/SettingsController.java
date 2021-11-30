@@ -3,10 +3,88 @@ package Controller;
 import Model.*;
 import View.*;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class SettingsController {
+
+    BlockingQueue<Message> queue;
+    Admin admin;
+    User user;
+    SettingsView settingsView;
+
+    public SettingsController(BlockingQueue<Message> queue, Admin admin, User user, SettingsView settingsView)
+    {
+        this.queue = queue;
+        this.admin = admin;
+        this.user = user;
+        this.settingsView = settingsView;
+    }
+
+    public void mainLoop()
+    {
+        while (settingsView.isDisplayable()) {
+            Message message = null;
+            try {
+                message = queue.take();
+            } catch (InterruptedException exception) {
+                // do nothing
+            }
+
+            if(message.getClass() == UpdateUsernameMessage.class) {
+                // if update username was clicked
+                UpdateUsernameMessage newName = (UpdateUsernameMessage) message;
+                if(newName.getNewUserName().length() == 0 || !admin.getUsernameToUser().containsKey(user.getUsername()))
+                {
+                    settingsView.updateNameSuccessFail(false);
+                }
+                else
+                {
+                    admin.deleteUser(user.getUsername());
+                    user.setUsername(newName.getNewUserName());
+                    admin.addUser(user);
+                    settingsView.updateNameSuccessFail(true);
+                }
+            }
+
+            else if(message.getClass() == UpdatePasswordMessage.class)
+            {
+                // update password button was clicked
+                UpdatePasswordMessage newPassword = (UpdatePasswordMessage) message;
+                if(newPassword.getPassword().length() == 0 || !admin.getUsernameToUser().containsKey(user.getUsername()))
+                {
+                    settingsView.updatePasswordSuccessFail(false);
+                }
+                else
+                {
+                    user.setPassword(newPassword.getPassword());
+                    settingsView.updatePasswordSuccessFail(true);
+                }
+            }
+
+            else if(message.getClass() == DeleteAccountMessage.class)
+            {
+                // delete account button was clicked
+                if(admin.deleteUser(user.getUsername()))
+                {
+                    settingsView.deleteSuccessFail(true);
+                }
+                else
+                {
+                    settingsView.deleteSuccessFail(false);
+                }
+            }
+
+            else if(message.getClass() == LogOutMessage.class)
+            {
+                // log out button was clicked
+                LogInToHomePage logIn = new LogInToHomePage(admin);
+                settingsView.dispose();
+            }
+
+        }
+    }
+    /*
     public SettingsController(Admin admin, User user)
     {
         SettingsView view = new SettingsView(user.getUsername(), user.getBankAccount().getBalance());
@@ -73,7 +151,7 @@ public class SettingsController {
             }
         });
     }
-
+    */
     public static void main(String[] args)
     {
         Admin admin = new Admin();
@@ -83,6 +161,11 @@ public class SettingsController {
         b.payUser(20,u);
         admin.addUser(u);
         admin.addUser(b);
-        new SettingsController(admin, u);
+        BlockingQueue<Message> queue = new LinkedBlockingQueue<>();
+        SettingsView view = new SettingsView(queue, u.getUsername(), u.getBankAccount().getBalance());
+        SettingsController c = new SettingsController(queue, admin, u, view);
+        c.mainLoop();
     }
+
+
 }

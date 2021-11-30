@@ -1,7 +1,15 @@
 package View;
 
+import Controller.Message;
+import Controller.RequestMessage;
+import Controller.TransferMessage;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class RequestTransferView extends JFrame {
     public JLabel title;
@@ -23,9 +31,10 @@ public class RequestTransferView extends JFrame {
     final Font titleText = new Font("Modern No. 20", Font.PLAIN, 30);
     final Font headerText = new Font("Modern No. 20", Font.PLAIN, 20);
 
+    private BlockingQueue<Message> queue;
 
-    public RequestTransferView(){
-        this.setLocation(0,0);
+    public RequestTransferView(BlockingQueue<Message> queue) {
+        this.setLocation(0, 0);
         // BASIC PAGE STYLING
         this.getContentPane().setBackground(background);
         this.setSize(500, 500);
@@ -50,12 +59,12 @@ public class RequestTransferView extends JFrame {
         amount.setBounds(175, 150, 150, 25);
 
         request = new JButton("Request");
-        request.setBounds(175,250,150,25);
+        request.setBounds(175, 250, 150, 25);
         request.setForeground(accentBlue);
         request.setFont(headerText);
 
         transfer = new JButton("Transfer");
-        transfer.setBounds(175,300,150,25);
+        transfer.setBounds(175, 300, 150, 25);
         transfer.setForeground(accentBlue);
         transfer.setFont(headerText);
 
@@ -89,10 +98,29 @@ public class RequestTransferView extends JFrame {
 
         this.setLayout(null);
         this.setVisible(true);
-    }
 
+        //request button action
+        request.addActionListener(e -> {
+            try {
+                Message msg = new RequestMessage(username.getText(), amount.getText());
+                queue.put(msg);
+            } catch (InterruptedException exception) {
+                // do nothing
+            }
+        });
+        //transfer button action
+        transfer.addActionListener(e -> {
+            try {
+                Message msg = new TransferMessage(username.getText(), amount.getText());
+                queue.put(msg);
+            } catch (InterruptedException exception) {
+                // do nothing
+            }
+        });
+    }
     public static void main(String[] args) {
-        new RequestTransferView();
+        BlockingQueue<Message> queue = new LinkedBlockingQueue<>();
+        new RequestTransferView(queue);
     }
 }
 //Chint Patel | patelchint2002@gmail.com

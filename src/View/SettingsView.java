@@ -1,13 +1,13 @@
 package View;
 import javax.swing.*;
 import java.awt.*;
+import java.util.concurrent.BlockingQueue;
 
+import Controller.*;
 import Model.*;
 
 public class SettingsView extends JFrame
 {
-   //private JFrame frame;
-   private JPanel panel;
    private JLabel settingLabel;
    private JLabel bankAccInfoLabel;
    private JLabel userNameLabel;
@@ -24,94 +24,230 @@ public class SettingsView extends JFrame
    public JButton logOutButton;
    public JTextField updateNameText;
    public JPasswordField passwordText;
+   private JButton homePage;
+   private JButton requestOrTransfer;
 
-   public SettingsView(String userName, double balance)
+   private BlockingQueue<Message> queue;
+
+   final Color background = Color.decode("#272727");
+   final Color accentPink = Color.decode("#E6BEAE");
+   final Color genericText = Color.decode("#FFFFFF");
+   final Color accentBlue = Color.decode("#A9BCD0");
+   final Font paragraphText = new Font("Modern No. 20", Font.PLAIN, 16);
+   final Font titleText = new Font("Modern No. 20", Font.PLAIN, 30);
+   final Font headerText = new Font("Modern No. 20", Font.PLAIN, 20);
+
+   public SettingsView(BlockingQueue<Message> queue, String userName, double balance)
    {
-       panel = new JPanel();
-       this.setSize(600,600);
-      // frame.setLayout(new FlowLayout());
-      // frame.setVisible(true);
-       this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-       this.add(panel);
+       this.queue = queue;
 
-       panel.setLayout(null);
+       this.setLocation(0,0);
+       this.setSize(600,600);
+       this.getContentPane().setBackground(background);
+       this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       this.setDefaultLookAndFeelDecorated(true);
+
+       homePage = new JButton("Home Page");
+       homePage.setBounds(0,0,180,40);
+       homePage.setForeground(accentPink);
+       homePage.setFont(titleText);
+
+       requestOrTransfer = new JButton("Request/Transfer");
+       requestOrTransfer.setBounds(190,0,250,40);
+       requestOrTransfer.setForeground(accentPink);
+       requestOrTransfer.setFont(titleText);
 
        settingLabel = new JLabel("Settings");
-       settingLabel.setBounds(200, 0, 80,25);
-       panel.add(settingLabel);
+       settingLabel.setBounds(460, 0, 160,40);
+       settingLabel.setFont(titleText);
+       settingLabel.setForeground(accentPink);
 
        bankAccInfoLabel = new JLabel("Bank Account Information:");
-       bankAccInfoLabel.setBounds(10, 50, 150, 25);
-       panel.add(bankAccInfoLabel);
+       bankAccInfoLabel.setBounds(10, 80, 230, 40);
+       bankAccInfoLabel.setFont(headerText);
+       bankAccInfoLabel.setForeground(accentPink);
 
        userNameLabel = new JLabel("User Name: " + userName);
-       userNameLabel.setBounds(200,80,200,25);
-       panel.add(userNameLabel);
+       userNameLabel.setBounds(200,130,200,35);
+       userNameLabel.setFont(headerText);
+       userNameLabel.setForeground(accentPink);
 
        bankBalanceLabel = new JLabel("Balance: $"+ balance);
-       bankBalanceLabel.setBounds(200,110,200,25);
-       panel.add(bankBalanceLabel);
+       bankBalanceLabel.setBounds(200,170,200,35);
+       bankBalanceLabel.setFont(headerText);
+       bankBalanceLabel.setForeground(accentPink);
 
        updateNameButton = new JButton("Update User Name");
-       updateNameButton.setBounds(60,160,150,25);
-       panel.add(updateNameButton);
+       updateNameButton.setBounds(40,260,170,25);
+       updateNameButton.setFont(paragraphText);
+       updateNameButton.setForeground(accentPink);
 
        updateNameText = new JTextField(20);
-       updateNameText.setBounds(240,160,150,25);
-       panel.add(updateNameText);
+       updateNameText.setBounds(240,260,150,25);
+
+       updateNameButton.addActionListener(e -> {
+           String str = updateNameText.getText();
+           try {
+               Message msg = new UpdateUsernameMessage(str);
+               queue.put(msg);
+           } catch (InterruptedException exception) {
+               // do nothing
+           }
+       });
 
        updateNameSuccess = new JLabel("User Name Updated!");
-       updateNameSuccess.setBounds(420, 160, 150, 25);
+       updateNameSuccess.setBounds(420, 260, 170, 25);
+       updateNameSuccess.setFont(paragraphText);
+       updateNameSuccess.setForeground(accentPink);
        updateNameSuccess.setVisible(false);
-       panel.add(updateNameSuccess);
 
        updateNameFail = new JLabel("Invalid UserName");
-       updateNameFail.setBounds(420, 160, 150, 25);
+       updateNameFail.setBounds(420, 260, 170, 25);
+       updateNameFail.setFont(paragraphText);
+       updateNameFail.setForeground(accentPink);
        updateNameFail.setVisible(false);
-       panel.add(updateNameFail);
 
        updatePasswordButton = new JButton("Update Password");
-       updatePasswordButton.setBounds(60,220,150,25);
-       panel.add(updatePasswordButton);
+       updatePasswordButton.setBounds(40,320,170,25);
+       updatePasswordButton.setFont(paragraphText);
+       updatePasswordButton.setForeground(accentPink);
 
        passwordText = new JPasswordField(20);
-       passwordText.setBounds(240,220, 150, 25);
-       panel.add(passwordText);
+       passwordText.setBounds(240,320, 150, 25);
+
+       updatePasswordButton.addActionListener(e -> {
+           String str = passwordText.getText();
+           try {
+               Message msg = new UpdatePasswordMessage(str);
+               queue.put(msg);
+           } catch (InterruptedException exception) {
+               // do nothing
+           }
+       });
 
        updatePasswordSuccess = new JLabel("Password Updated!");
-       updatePasswordSuccess.setBounds(420, 220, 150, 25);
+       updatePasswordSuccess.setBounds(420, 320, 170, 25);
+       updatePasswordSuccess.setFont(paragraphText);
+       updatePasswordSuccess.setForeground(accentPink);
        updatePasswordSuccess.setVisible(false);
-       panel.add(updatePasswordSuccess);
 
        updatePasswordFail = new JLabel("Invalid Password");
-       updatePasswordFail.setBounds(420, 220, 150, 25);
+       updatePasswordFail.setBounds(420, 320, 170, 25);
+       updatePasswordFail.setFont(paragraphText);
+       updatePasswordFail.setForeground(accentPink);
        updatePasswordFail.setVisible(false);
-       panel.add(updatePasswordFail);
 
        deleteAccountButton = new JButton("Delete Account");
-       deleteAccountButton.setBounds(60,280, 150,25);
-       panel.add(deleteAccountButton);
+       deleteAccountButton.setBounds(40,380, 170,25);
+       deleteAccountButton.setFont(paragraphText);
+       deleteAccountButton.setForeground(accentPink);
+
+       deleteAccountButton.addActionListener(e -> {
+           try {
+               Message msg = new DeleteAccountMessage();
+               queue.put(msg);
+           } catch (InterruptedException exception) {
+               // do nothing
+           }
+       });
 
        deleteSuccess = new JLabel("Account Deleted");
-       deleteSuccess.setBounds(420, 280, 150, 25);
+       deleteSuccess.setBounds(420, 380, 170, 25);
+       deleteSuccess.setFont(paragraphText);
+       deleteSuccess.setForeground(accentPink);
        deleteSuccess.setVisible(false);
-       panel.add(deleteSuccess);
 
        deleteFail = new JLabel("Delete Fail");
-       deleteFail.setBounds(420, 280, 150, 25);
+       deleteFail.setBounds(420, 380, 170, 25);
+       deleteFail.setFont(paragraphText);
+       deleteFail.setForeground(accentPink);
        deleteFail.setVisible(false);
-       panel.add(deleteFail);
 
        logOutButton = new JButton("Log Out");
-       logOutButton.setBounds(200, 450,150,25);
-       panel.add(logOutButton);
+       logOutButton.setBounds(180, 480,150,25);
+       logOutButton.setFont(paragraphText);
+       logOutButton.setForeground(accentPink);
 
+       logOutButton.addActionListener(e -> {
+           try {
+               Message msg = new LogOutMessage();
+               queue.put(msg);
+           } catch (InterruptedException exception) {
+               // do nothing
+           }
+       });
+
+       this.add(settingLabel);
+       this.add(bankAccInfoLabel);
+       this.add(bankBalanceLabel);
+       this.add(userNameLabel);
+       this.add(updateNameButton);
+       this.add(updateNameText);
+       this.add(updateNameSuccess);
+       this.add(updateNameFail);
+       this.add(updatePasswordButton);
+       this.add(passwordText);
+       this.add(updatePasswordSuccess);
+       this.add(updatePasswordFail);
+       this.add(deleteAccountButton);
+       this.add(deleteSuccess);
+       this.add(deleteFail);
+       this.add(logOutButton);
+       this.add(homePage);
+       this.add(requestOrTransfer);
+
+       this.setLayout(null);
        this.setVisible(true);
    }
 
+   public void updateNameSuccessFail(boolean val)
+   {
+       if(val == true)
+       {
+           this.updateNameSuccess.setVisible(true);
+           this.updateNameFail.setVisible(false);
+       }
+       else
+       {
+           this.updateNameFail.setVisible(true);
+           this.updateNameSuccess.setVisible(false);
+       }
+   }
+
+    public void updatePasswordSuccessFail(boolean val)
+    {
+        if(val == true)
+        {
+            this.updatePasswordSuccess.setVisible(true);
+            this.updatePasswordFail.setVisible(false);
+        }
+        else
+        {
+            this.updatePasswordFail.setVisible(true);
+            this.updatePasswordSuccess.setVisible(false);
+        }
+    }
+
+    public void deleteSuccessFail(boolean val)
+    {
+        if(val == true)
+        {
+            this.deleteSuccess.setVisible(true);
+            this.deleteFail.setVisible(false);
+        }
+        else
+        {
+            this.deleteFail.setVisible(true);
+            this.deleteSuccess.setVisible(false);
+        }
+    }
+
+   /*
    public static void main(String[] args)
    {
        User user = new User("Jun Wu", "abc", new BankAccount("Jun", "Wu", 500));
        new SettingsView(user.getUsername(), user.getBankAccount().getBalance());
    }
+
+    */
 }
