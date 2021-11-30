@@ -34,7 +34,7 @@ public class SettingsController {
             if(message.getClass() == UpdateUsernameMessage.class) {
                 // if update username was clicked
                 UpdateUsernameMessage newName = (UpdateUsernameMessage) message;
-                if(newName.getNewUserName().length() == 0)
+                if(newName.getNewUserName().length() == 0 || !admin.getUsernameToUser().containsKey(user.getUsername()))
                 {
                     settingsView.updateNameSuccessFail(false);
                 }
@@ -51,7 +51,7 @@ public class SettingsController {
             {
                 // update password button was clicked
                 UpdatePasswordMessage newPassword = (UpdatePasswordMessage) message;
-                if(newPassword.getPassword().length() == 0)
+                if(newPassword.getPassword().length() == 0 || !admin.getUsernameToUser().containsKey(user.getUsername()))
                 {
                     settingsView.updatePasswordSuccessFail(false);
                 }
