@@ -143,7 +143,7 @@ public class RequestTransferController {
         admin.addUser(u);
         admin.addUser(b);
         BlockingQueue<Message> queue = new LinkedBlockingQueue<>();
-        RequestTransferView RTview = new RequestTransferView(queue);
+        RequestTransferView RTview = new RequestTransferView(queue,u);
         RequestTransferController RTcontroller = new RequestTransferController(queue,admin,u,RTview);
         RTcontroller.mainLoop();
     }
