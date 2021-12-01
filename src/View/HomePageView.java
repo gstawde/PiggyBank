@@ -155,7 +155,7 @@ public class HomePageView extends JFrame implements ActionListener {
             newFrame.setVisible(true);
             queue.add(m);
         } else if (e.getSource() == requestOrTransfer) {
-            m = new NavBarUseMessage("\'equest or Transfer\' menu item clicked");
+            m = new NavBarUseMessage("\'Request or Transfer\' menu item clicked");
             newFrame = new RequestTransferView(queue);
             newFrame.setVisible(true);
             queue.add(m);
