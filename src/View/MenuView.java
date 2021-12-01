@@ -88,6 +88,7 @@ public class MenuView implements ActionListener {
             newFrame.setVisible(true);
             queue.add(m);
         }
+        j.setVisible(false);
     }
 
 
