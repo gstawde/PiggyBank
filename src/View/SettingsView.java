@@ -24,8 +24,6 @@ public class SettingsView extends JFrame
    public JButton logOutButton;
    public JTextField updateNameText;
    public JPasswordField passwordText;
-   private JButton homePage;
-   private JButton requestOrTransfer;
 
    private BlockingQueue<Message> queue;
 
@@ -47,43 +45,33 @@ public class SettingsView extends JFrame
        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        this.setDefaultLookAndFeelDecorated(true);
 
-       homePage = new JButton("Home Page");
-       homePage.setBounds(0,0,180,40);
-       homePage.setForeground(accentPink);
-       homePage.setFont(titleText);
-
-       requestOrTransfer = new JButton("Request/Transfer");
-       requestOrTransfer.setBounds(190,0,250,40);
-       requestOrTransfer.setForeground(accentPink);
-       requestOrTransfer.setFont(titleText);
-
        settingLabel = new JLabel("Settings");
-       settingLabel.setBounds(460, 0, 160,40);
+       settingLabel.setBounds(170, 0, 160,40);
        settingLabel.setFont(titleText);
        settingLabel.setForeground(accentPink);
 
        bankAccInfoLabel = new JLabel("Bank Account Information:");
-       bankAccInfoLabel.setBounds(10, 80, 230, 40);
+       bankAccInfoLabel.setBounds(10, 60, 230, 40);
        bankAccInfoLabel.setFont(headerText);
        bankAccInfoLabel.setForeground(accentPink);
 
        userNameLabel = new JLabel("User Name: " + user.getUsername());
-       userNameLabel.setBounds(200,130,200,35);
+       userNameLabel.setBounds(170,90,200,35);
        userNameLabel.setFont(headerText);
        userNameLabel.setForeground(accentPink);
 
        bankBalanceLabel = new JLabel("Balance: $"+ balance);
-       bankBalanceLabel.setBounds(200,170,200,35);
+       bankBalanceLabel.setBounds(170,130,200,35);
        bankBalanceLabel.setFont(headerText);
        bankBalanceLabel.setForeground(accentPink);
 
        updateNameButton = new JButton("Update User Name");
-       updateNameButton.setBounds(40,260,170,25);
+       updateNameButton.setBounds(0,190,170,25);
        updateNameButton.setFont(paragraphText);
        updateNameButton.setForeground(accentPink);
 
        updateNameText = new JTextField(20);
-       updateNameText.setBounds(240,260,150,25);
+       updateNameText.setBounds(180,190,150,25);
 
        updateNameButton.addActionListener(e -> {
            String str = updateNameText.getText();
@@ -96,24 +84,24 @@ public class SettingsView extends JFrame
        });
 
        updateNameSuccess = new JLabel("User Name Updated!");
-       updateNameSuccess.setBounds(420, 260, 170, 25);
+       updateNameSuccess.setBounds(340, 190, 170, 25);
        updateNameSuccess.setFont(paragraphText);
        updateNameSuccess.setForeground(accentPink);
        updateNameSuccess.setVisible(false);
 
        updateNameFail = new JLabel("Invalid UserName");
-       updateNameFail.setBounds(420, 260, 170, 25);
+       updateNameFail.setBounds(340, 190, 170, 25);
        updateNameFail.setFont(paragraphText);
        updateNameFail.setForeground(accentPink);
        updateNameFail.setVisible(false);
 
        updatePasswordButton = new JButton("Update Password");
-       updatePasswordButton.setBounds(40,320,170,25);
+       updatePasswordButton.setBounds(0,250,170,25);
        updatePasswordButton.setFont(paragraphText);
        updatePasswordButton.setForeground(accentPink);
 
        passwordText = new JPasswordField(20);
-       passwordText.setBounds(240,320, 150, 25);
+       passwordText.setBounds(180,250, 150, 25);
 
        updatePasswordButton.addActionListener(e -> {
            String str = passwordText.getText();
@@ -126,19 +114,19 @@ public class SettingsView extends JFrame
        });
 
        updatePasswordSuccess = new JLabel("Password Updated!");
-       updatePasswordSuccess.setBounds(420, 320, 170, 25);
+       updatePasswordSuccess.setBounds(340, 250, 170, 25);
        updatePasswordSuccess.setFont(paragraphText);
        updatePasswordSuccess.setForeground(accentPink);
        updatePasswordSuccess.setVisible(false);
 
        updatePasswordFail = new JLabel("Invalid Password");
-       updatePasswordFail.setBounds(420, 320, 170, 25);
+       updatePasswordFail.setBounds(340, 250, 170, 25);
        updatePasswordFail.setFont(paragraphText);
        updatePasswordFail.setForeground(accentPink);
        updatePasswordFail.setVisible(false);
 
        deleteAccountButton = new JButton("Delete Account");
-       deleteAccountButton.setBounds(40,380, 170,25);
+       deleteAccountButton.setBounds(0,310, 170,25);
        deleteAccountButton.setFont(paragraphText);
        deleteAccountButton.setForeground(accentPink);
 
@@ -152,19 +140,19 @@ public class SettingsView extends JFrame
        });
 
        deleteSuccess = new JLabel("Account Deleted");
-       deleteSuccess.setBounds(420, 380, 170, 25);
+       deleteSuccess.setBounds(350, 310, 170, 25);
        deleteSuccess.setFont(paragraphText);
        deleteSuccess.setForeground(accentPink);
        deleteSuccess.setVisible(false);
 
        deleteFail = new JLabel("Delete Fail");
-       deleteFail.setBounds(420, 380, 170, 25);
+       deleteFail.setBounds(350, 310, 170, 25);
        deleteFail.setFont(paragraphText);
        deleteFail.setForeground(accentPink);
        deleteFail.setVisible(false);
 
        logOutButton = new JButton("Log Out");
-       logOutButton.setBounds(180, 480,150,25);
+       logOutButton.setBounds(160, 370,150,25);
        logOutButton.setFont(paragraphText);
        logOutButton.setForeground(accentPink);
 
@@ -193,8 +181,7 @@ public class SettingsView extends JFrame
        this.add(deleteSuccess);
        this.add(deleteFail);
        this.add(logOutButton);
-       this.add(homePage);
-       this.add(requestOrTransfer);
+
        MenuView mv = new MenuView(this,user,queue);
 
        this.setLayout(null);
