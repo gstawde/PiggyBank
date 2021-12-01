@@ -77,6 +77,7 @@ public class HomePageView extends JFrame implements ActionListener {
         mb.setBackground(background);
         mb.setOpaque(true);
         menu.setFont(headerText);
+        menu.setForeground(accentPink);
         homePage.setBackground(accentBlue);
         homePage.setFont(paragraphText);
         homePage.setForeground(background);
