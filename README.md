@@ -49,5 +49,8 @@
 - [x] Finish backend for Settings
 - [x] Finish backend for Transfer/Request
 - [x] Start on and/or finish establishing universal basic UI template
-
+### Sprint 4 (Ends December 02, 2021)  
+- [x] Finish UI design
+- [x] Program navbar
+- [x] Debug
 
