@@ -1,12 +1,14 @@
 package Model;
 
 import java.util.HashMap;
+import java.util.HashSet;
 
 /***
  *The Model.Admin class handles keeping track of and authenticating Users of the App
  */
 public class Admin {
     //Instance Variable and Constructor
+    private HashSet<User> userList = new HashSet<>();
     private HashMap<String, User> usernameToUser;
     public Admin(){
         this.usernameToUser = new HashMap<>();
@@ -26,6 +28,7 @@ public class Admin {
         }
 
         this.usernameToUser.put(u.getUsername(), u);
+        this.userList.add(u);
         return true;
     }
 
@@ -36,6 +39,7 @@ public class Admin {
      */
     public boolean deleteUser(String username){
        User u = this.usernameToUser.get(username);
+       this.userList.remove(u);
        return this.usernameToUser.remove(username,u);
     }
 
@@ -56,5 +60,15 @@ public class Admin {
      * @return this.HashMap
      */
     public HashMap<String, User> getUsernameToUser(){return this.usernameToUser;}
+
+
+    /***
+     * Get method of HashSet
+     * @return this.HashSet
+     */
+    public HashSet<User> getUserList(){return this.userList;}
+
+
+
 }
 //Shivam Amin | shivamamin4@gmail.com

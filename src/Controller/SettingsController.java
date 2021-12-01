@@ -78,7 +78,7 @@ public class SettingsController {
             else if(message.getClass() == LogOutMessage.class)
             {
                 // log out button was clicked
-                LogInToHomePage logIn = new LogInToHomePage(admin);
+                LogInController logIn = new LogInController(queue,admin,new LogInView(admin,queue));
                 settingsView.dispose();
             }
 

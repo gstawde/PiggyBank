@@ -1,10 +1,12 @@
 package Model;
 
+import java.io.Serializable;
+
 /**
  * The Model.BankAccount represent the bank amount of the user
  * A Model.BankAccount contains a first name, a last name and the balance
  */
-public class BankAccount implements Comparable<BankAccount>
+public class BankAccount implements Comparable<BankAccount>, Serializable
 {
     private String firstName;
     private String lastName;

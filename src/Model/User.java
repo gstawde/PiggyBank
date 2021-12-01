@@ -1,12 +1,13 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /***
  *The Model.User class defines an individual user of the app and stores Model.User data
  */
 
-public class User implements Comparable<User>{
+public class User implements Comparable<User>, Serializable {
     //Instance Variables
     private String username;
     private String password;
@@ -118,6 +119,7 @@ public class User implements Comparable<User>{
     public ArrayList<Request> getRequests() {
         return requests;
     }
+
 
     /***
      * compare user to another user to store in list

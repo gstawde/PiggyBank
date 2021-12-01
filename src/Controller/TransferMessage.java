@@ -1,5 +1,6 @@
 package Controller;
 
+
 public class TransferMessage implements Message{
     private String recipient;
     private String amount;
