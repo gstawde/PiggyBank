@@ -44,10 +44,10 @@
 - [x] Delegate pages for Sprint 3
 - [x] Complete implementation of *Iterator Design Pattern* on home page
 ### Sprint 3 (Ends November 21, 2021)  
-- [ ] Finish backend for HomePage
-- [ ] Finish backend for Login/Sign Up
-- [ ] Finish backend for Settings
-- [ ] Finish backend for Transfer/Request
-- [ ] Start on and/or finish establishing universal basic UI template
+- [x] Finish backend for HomePage
+- [x] Finish backend for Login/Sign Up
+- [x] Finish backend for Settings
+- [x] Finish backend for Transfer/Request
+- [x] Start on and/or finish establishing universal basic UI template
 
 
