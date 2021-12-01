@@ -13,19 +13,29 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 
+import Controller.Message;
+import Controller.NavBarUseMessage;
 import Model.BankAccount;
 import Model.User;
 
-public class HomePageView extends JFrame{
+public class HomePageView extends JFrame implements ActionListener {
+
+    User user;
 
     JTable table;
     JLabel transactionsSummary;
     JScrollPane sp;
-    JButton homePage;
-    JButton requestOrTransfer;
-    JButton settings;
+
+    JMenuBar mb;
+    JMenu menu;
+    JMenuItem homePage, requestOrTransfer, settings;
 
     // BASIC PAGE STYLING
     final Color background = Color.decode("#272727");
@@ -36,7 +46,11 @@ public class HomePageView extends JFrame{
     final Font titleText = new Font("Modern No. 20", Font.PLAIN, 30);
     final Font headerText = new Font("Modern No. 20", Font.PLAIN, 20);
 
+    private BlockingQueue<Message> queue = new LinkedBlockingQueue<>();
+
     public HomePageView(User user){
+
+        this.user = user;
 
         // BASIC PAGE STYLING
         this.getContentPane().setBackground(background);
@@ -44,28 +58,46 @@ public class HomePageView extends JFrame{
 
         // PAGE HEADER
         // navbar:
-        homePage = new JButton("Home Page");
-        requestOrTransfer = new JButton("Request/Transfer");
-        settings = new JButton("Settings");
-        this.add(homePage);
-        this.add(requestOrTransfer);
-        this.add(settings);
+        mb = new JMenuBar();
+        menu = new JMenu("Menu");
+        homePage = new JMenuItem("Home");
+        requestOrTransfer = new JMenuItem("Request or Transfer");
+        settings = new JMenuItem("Settings");
+        menu.add(homePage);
+        menu.add(requestOrTransfer);
+        menu.add(settings);
+        mb.add(menu);
+        this.setJMenuBar(mb);
+        this.setSize(500,500);
+        homePage.addActionListener(this);
+        requestOrTransfer.addActionListener(this);
+        settings.addActionListener(this);
         // navbar styling:
-        homePage.setMargin(new Insets(10,175, 0,5));
-        homePage.setForeground(genericText);
-        homePage.setOpaque(false);
-        homePage.setBorderPainted(false);
-        homePage.setFont(headerText);
-        requestOrTransfer.setMargin(new Insets(10,0, 0,5));
-        requestOrTransfer.setForeground(accentBlue);
-        requestOrTransfer.setOpaque(false);
-        requestOrTransfer.setBorderPainted(false);
-        requestOrTransfer.setFont(headerText);
-        settings.setMargin(new Insets(10,0, 0,5));
-        settings.setForeground(accentBlue);
-        settings.setOpaque(false);
-        settings.setBorderPainted(false);
-        settings.setFont(headerText);
+        mb.setForeground(background);
+        mb.setBackground(background);
+        mb.setOpaque(true);
+        menu.setFont(headerText);
+        homePage.setBackground(accentBlue);
+        homePage.setFont(paragraphText);
+        homePage.setForeground(background);
+        requestOrTransfer.setBackground(accentBlue);
+        requestOrTransfer.setFont(paragraphText);
+        requestOrTransfer.setForeground(genericText);
+        settings.setBackground(accentBlue);
+        settings.setFont(paragraphText);
+        settings.setForeground(genericText);
+
+        // spacing:
+        this.add(Box.createVerticalStrut(50));
+
+        // Logo
+        ImageIcon original = new ImageIcon("piggyBankLogo.png"); // load the image to a imageIcon
+        Image forTransforming = original.getImage(); // transform it
+        Image newImage = forTransforming.getScaledInstance(300, 300,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+        original = new ImageIcon(newImage);
+        JLabel label = new JLabel(original);
+        this.add(label);
+
         // spacing:
         this.add(Box.createVerticalStrut(50));
 
@@ -74,9 +106,9 @@ public class HomePageView extends JFrame{
         transactionsSummary.setFont(titleText);
         transactionsSummary.setForeground(accentPink);
         this.add(transactionsSummary);
+
         // spacing:
         this.add(Box.createVerticalStrut(50));
-
 
         // TRANSACTIONS TABLE
         // table content:
@@ -110,6 +142,29 @@ public class HomePageView extends JFrame{
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Message m;
+        JFrame newFrame;
+        if (e.getSource() == homePage) {
+            m = new NavBarUseMessage("\'Home\' menu item clicked");
+            newFrame = new HomePageView(user);
+            newFrame.setVisible(true);
+            queue.add(m);
+        } else if (e.getSource() == requestOrTransfer) {
+            m = new NavBarUseMessage("\'equest or Transfer\' menu item clicked");
+            newFrame = new RequestTransferView(queue);
+            newFrame.setVisible(true);
+            queue.add(m);
+        } else if (e.getSource() == settings) {
+            m = new NavBarUseMessage("\'Settings\' menu item clicked");
+            newFrame = new SettingsView(queue, user.getUsername(), user.getBankAccount().getBalance());
+            newFrame.setVisible(true);
+            queue.add(m);
+        }
     }
 
     public static void main(String[] a){
@@ -118,5 +173,10 @@ public class HomePageView extends JFrame{
         u.payUser(50,b);
         b.payUser(20,u);
         HomePageView v = new HomePageView(u);
+
     }
+
+
 }
+
+// © Nov 08, 2021 | Gargi Tawde | gargi.tawde01@gmail.com
