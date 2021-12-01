@@ -25,17 +25,13 @@ import Controller.NavBarUseMessage;
 import Model.BankAccount;
 import Model.User;
 
-public class HomePageView extends JFrame implements ActionListener {
+public class HomePageView extends JFrame{
 
     User user;
 
     JTable table;
     JLabel transactionsSummary;
     JScrollPane sp;
-
-    JMenuBar mb;
-    JMenu menu;
-    JMenuItem homePage, requestOrTransfer, settings;
 
     // BASIC PAGE STYLING
     final Color background = Color.decode("#272727");
@@ -58,35 +54,7 @@ public class HomePageView extends JFrame implements ActionListener {
 
         // PAGE HEADER
         // navbar:
-        mb = new JMenuBar();
-        menu = new JMenu("Menu");
-        homePage = new JMenuItem("Home");
-        requestOrTransfer = new JMenuItem("Request or Transfer");
-        settings = new JMenuItem("Settings");
-        menu.add(homePage);
-        menu.add(requestOrTransfer);
-        menu.add(settings);
-        mb.add(menu);
-        this.setJMenuBar(mb);
-        this.setSize(500,500);
-        homePage.addActionListener(this);
-        requestOrTransfer.addActionListener(this);
-        settings.addActionListener(this);
-        // navbar styling:
-        mb.setForeground(background);
-        mb.setBackground(background);
-        mb.setOpaque(true);
-        menu.setFont(headerText);
-        menu.setForeground(accentPink);
-        homePage.setBackground(accentBlue);
-        homePage.setFont(paragraphText);
-        homePage.setForeground(background);
-        requestOrTransfer.setBackground(accentBlue);
-        requestOrTransfer.setFont(paragraphText);
-        requestOrTransfer.setForeground(genericText);
-        settings.setBackground(accentBlue);
-        settings.setFont(paragraphText);
-        settings.setForeground(genericText);
+        MenuView mv = new MenuView(this,user,queue);
 
         // spacing:
         this.add(Box.createVerticalStrut(50));
@@ -144,28 +112,6 @@ public class HomePageView extends JFrame implements ActionListener {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        Message m;
-        JFrame newFrame;
-        if (e.getSource() == homePage) {
-            m = new NavBarUseMessage("\'Home\' menu item clicked");
-            newFrame = new HomePageView(user);
-            newFrame.setVisible(true);
-            queue.add(m);
-        } else if (e.getSource() == requestOrTransfer) {
-            m = new NavBarUseMessage("\'Request or Transfer\' menu item clicked");
-            newFrame = new RequestTransferView(queue);
-            newFrame.setVisible(true);
-            queue.add(m);
-        } else if (e.getSource() == settings) {
-            m = new NavBarUseMessage("\'Settings\' menu item clicked");
-            newFrame = new SettingsView(queue, user.getUsername(), user.getBankAccount().getBalance());
-            newFrame.setVisible(true);
-            queue.add(m);
-        }
     }
 
     public static void main(String[] a){

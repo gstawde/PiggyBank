@@ -3,6 +3,7 @@ package View;
 import Controller.Message;
 import Controller.RequestMessage;
 import Controller.TransferMessage;
+import Model.User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,7 +34,7 @@ public class RequestTransferView extends JFrame {
 
     private BlockingQueue<Message> queue;
 
-    public RequestTransferView(BlockingQueue<Message> queue) {
+    public RequestTransferView(BlockingQueue<Message> queue, User u) {
         this.setLocation(0, 0);
         // BASIC PAGE STYLING
         this.getContentPane().setBackground(background);
@@ -95,6 +96,7 @@ public class RequestTransferView extends JFrame {
         this.add(invalidUserName);
         this.add(invalidAmount);
         this.add(insufficientFunds);
+        MenuView mv = new MenuView(this,u,queue);
 
         this.setLayout(null);
         this.setVisible(true);
@@ -118,9 +120,10 @@ public class RequestTransferView extends JFrame {
             }
         });
     }
+    /*
     public static void main(String[] args) {
         BlockingQueue<Message> queue = new LinkedBlockingQueue<>();
-        new RequestTransferView(queue);
-    }
+        new RequestTransferView(queue,);
+    }*/
 }
 //Chint Patel | patelchint2002@gmail.com
