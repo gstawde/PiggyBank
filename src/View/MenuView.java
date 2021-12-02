@@ -79,7 +79,7 @@ public class MenuView implements ActionListener {
 
         if (e.getSource() == homePage) {
             m = new NavBarUseMessage("\'Home\' menu item clicked");
-            newFrame = new HomePageView(user, admin,queue);
+            newFrame = new HomePageView(user.getTransactionHistory().iterator(), queue);
             newFrame.setVisible(true);
             queue.add(m);
         } else if (e.getSource() == requestOrTransfer) {

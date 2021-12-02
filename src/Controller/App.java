@@ -13,7 +13,12 @@ public class App {
 
     public App(){
         admin = new Admin();
-        admin.addUser(new User("s","a",new BankAccount("s","a",50)));
+        User s = new User("s","a",new BankAccount("s","a",50));
+        User a = new User("a","a",new BankAccount("s","a",50));
+        admin.addUser(s);
+        admin.addUser(a);
+        s.payUser(25,a);
+
         BlockingQueue queue = new LinkedBlockingQueue();
         LogInController start = new LogInController(queue,admin,new LogInView(admin,queue));
         start.mainLoop();
