@@ -21,7 +21,7 @@ public class LogInController {
         this.admin = admin;
         this.lView = lView;
 
-        mainLoop();
+        //mainLoop();
     }
 
     public void mainLoop() {

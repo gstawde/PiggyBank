@@ -3,6 +3,8 @@ package View;
 import Controller.Messages.Message;
 import Controller.Messages.RequestMessage;
 import Controller.Messages.TransferMessage;
+import Controller.RequestOrTransferMessage;
+import Controller.SettingsPageMessage;
 import Model.Admin;
 import Model.User;
 
@@ -20,6 +22,7 @@ public class RequestTransferView extends JFrame {
     public JTextField amount;
     public JButton request;
     public JButton transfer;
+    JButton settings;
 
     // BASIC PAGE STYLING
     final Color background = Color.decode("#272727");
@@ -41,9 +44,23 @@ public class RequestTransferView extends JFrame {
         this.setDefaultLookAndFeelDecorated(true);
 
         title = new JLabel("Request/Transfer");
-        title.setBounds(150, 10, 250, 25);
+        title.setBounds(200, 10, 250, 25);
         title.setFont(titleText);
         title.setForeground(accentPink);
+
+        settings = new JButton("Setting");
+        settings.setBounds(0,0,150,40);
+        settings.setForeground(accentPink);
+        settings.setFont(titleText);
+
+        settings.addActionListener(e -> {
+            try {
+                Message msg = new SettingsPageMessage();
+                queue.put(msg);
+            } catch (InterruptedException exception) {
+                // do nothing
+            }
+        });
 
         success = new JLabel("Process Success");
         success.setBounds(175, 50, 150, 25);
@@ -94,7 +111,8 @@ public class RequestTransferView extends JFrame {
         this.add(invalidUserName);
         this.add(invalidAmount);
         this.add(insufficientFunds);
-        MenuView mv = new MenuView(this,u,queue,a);
+        this.add(settings);
+      //  MenuView mv = new MenuView(this,u,queue,a);
 
         this.setLayout(null);
         this.setVisible(true);
