@@ -21,15 +21,12 @@ import java.util.concurrent.LinkedBlockingQueue;
 import Controller.Messages.Message;
 import Controller.RequestOrTransferMessage;
 import Controller.SettingsPageMessage;
-import Model.Admin;
-import Model.BankAccount;
-import Model.Transaction;
-import Model.User;
+import Model.*;
 
 public class HomePageView extends JFrame{
 
     User user;
-    Iterator<Transaction> transactionIterator;
+    TransactionsIterator transactionIterator;
     JTable table;
     JLabel transactionsSummary;
     JScrollPane sp;
@@ -46,13 +43,13 @@ public class HomePageView extends JFrame{
     final Font headerText = new Font("Modern No. 20", Font.PLAIN, 20);
 
 
-    public HomePageView(Iterator<Transaction> iterator, BlockingQueue queue){
+    public HomePageView(TransactionsIterator iterator, BlockingQueue queue){
 
         transactionIterator = iterator;
 
         // BASIC PAGE STYLING
         this.getContentPane().setBackground(background);
-        this.setSize(500, 500);
+        this.setSize(500, 600);
 
         // PAGE HEADER
         // navbar:
@@ -160,7 +157,7 @@ public class HomePageView extends JFrame{
         u.payUser(50,b);
         b.payUser(20,u);
         BlockingQueue<Message> queue = new LinkedBlockingQueue<>();
-        HomePageView v = new HomePageView(u.getTransactionHistory().iterator(), queue);
+        HomePageView v = new HomePageView(u.getTransactionIterator(), queue);
 
     }
 

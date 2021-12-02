@@ -42,7 +42,7 @@ public class LogInController {
                 if(u != null){
                     lView.logInAttempt(true,u);
 
-                    HomePageView hView = new HomePageView(u.getTransactionHistory().iterator(), queue);
+                    HomePageView hView = new HomePageView(u.getTransactionIterator(), queue);
                     HomePageController control = new HomePageController(queue, u, admin, hView);
                     lView.dispose();
                     control.mainLoop();
@@ -59,7 +59,7 @@ public class LogInController {
                 if(admin.addUser(u)){
                     lView.signUpAttempt(true,u);
 
-                    HomePageView hView = new HomePageView(u.getTransactionHistory().iterator(), queue);
+                    HomePageView hView = new HomePageView(u.getTransactionIterator(), queue);
                     HomePageController control = new HomePageController(queue, u, admin, hView);
                     lView.dispose();
                     control.mainLoop();

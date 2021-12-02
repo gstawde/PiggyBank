@@ -117,7 +117,7 @@ public class LogInView extends JFrame{
     public void logInAttempt(boolean success,User u){
 
         if(success){
-            HomePageView hpv = new HomePageView(u.getTransactionHistory().iterator(),queue);
+            HomePageView hpv = new HomePageView(u.getTransactionIterator(),queue);
             this.dispose();
         }else{
             this.fail.setVisible(true);
@@ -127,7 +127,7 @@ public class LogInView extends JFrame{
 
     public void signUpAttempt(boolean success, User u){
         if(success){
-            HomePageView hpv = new HomePageView(u.getTransactionHistory().iterator(),queue);
+            HomePageView hpv = new HomePageView(u.getTransactionIterator(),queue);
             this.dispose();
         }else{
             this.fail2.setVisible(true);
