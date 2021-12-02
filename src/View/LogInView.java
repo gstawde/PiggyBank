@@ -1,32 +1,22 @@
 package View;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.concurrent.BlockingQueue;
-
-
 import Controller.Messages.Message;
 import Controller.Messages.SignInMessage;
 import Controller.Messages.SignUpMessage;
 import Model.Admin;
-import Model.User;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.concurrent.BlockingQueue;
 
 public class LogInView extends JFrame{
     // BASIC PAGE STYLING
     final Color background = Color.decode("#272727");
     final Color accentPink = Color.decode("#E6BEAE");
-    final Color genericText = Color.decode("#FFFFFF");
-    final Color accentBlue = Color.decode("#A9BCD0");
-    final Font paragraphText = new Font("Modern No. 20", Font.PLAIN, 16);
     final Font titleText = new Font("Modern No. 20", Font.PLAIN, 30);
-    final Font headerText = new Font("Modern No. 20", Font.PLAIN, 20);
 
 
-    private BlockingQueue<Message> queue;
     public Admin a;
-    public JTable table;
     public JTextField username;
     public JTextField password;
     public JLabel title;
@@ -35,24 +25,26 @@ public class LogInView extends JFrame{
     public JLabel fail;
     public JLabel fail2;
 
-    public LogInView(Admin a, BlockingQueue queue){
+    public LogInView(Admin a, BlockingQueue<Message> queue){
         this.getContentPane().setBackground(background);
         this.setSize(500, 500);
 
 
         this.a = a;
-        this.queue =  queue;
-        this.setLocation(175,0);
+        //this.setLocation(0,0);
         this.setSize(500, 500);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setDefaultLookAndFeelDecorated(true);
+        setDefaultLookAndFeelDecorated(true);
 
 
         title = new JLabel("Login");
-        title.setBounds(0, 20, 150, 25);
+        title.setBounds((this.getWidth()-75)/2, 20, 150, 25);
+        title.setSize(150,25);
         title.setForeground(accentPink);
         title.setFont(titleText);
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.add(title);
+        //setLocationRelativeTo(null);
+
 
 
         username = new JTextField("Username");
@@ -71,7 +63,7 @@ public class LogInView extends JFrame{
         signup.setBounds(200,350,100,25);
         signup.setBackground(accentPink);
 
-        this.add(title);
+
         this.add(username);
         this.add(password);
         this.add(signin);
@@ -89,24 +81,20 @@ public class LogInView extends JFrame{
         fail2.setVisible(false);
         this.add(fail2);
 
-        signin.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    queue.put(new SignInMessage("Sign In Attempted"));
-                } catch (InterruptedException ex) {
-                    ex.printStackTrace();
-                }
+        signin.addActionListener(e -> {
+            try {
+                queue.put(new SignInMessage("Sign In Attempted"));
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
             }
         });
 
 
-        signup.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    queue.put(new SignUpMessage("Sign Up Attempted"));
-                } catch (InterruptedException ex) {
-                    ex.printStackTrace();
-                }
+        signup.addActionListener(e -> {
+            try {
+                queue.put(new SignUpMessage("Sign Up Attempted"));
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
             }
         });
 
@@ -116,7 +104,7 @@ public class LogInView extends JFrame{
 
     }
 
-    public void logInAttempt(boolean success,User u){
+    public void logInAttempt(boolean success){
 
         if(!success){
             this.fail.setVisible(true);
@@ -124,7 +112,7 @@ public class LogInView extends JFrame{
         }
     }
 
-    public void signUpAttempt(boolean success, User u){
+    public void signUpAttempt(boolean success){
         if(!success){
             this.fail2.setVisible(true);
             this.fail.setVisible(false);

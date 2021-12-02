@@ -40,7 +40,7 @@ public class LogInController {
                 String pass = lView.password.getText();
                 User u = lView.a.authenticateUser(user,pass);
                 if(u != null){
-                    lView.logInAttempt(true,u);
+                    lView.logInAttempt(true);
 
                     HomePageView hView = new HomePageView(u.getTransactionIterator(), queue);
                     HomePageController control = new HomePageController(queue, u, admin, hView);
@@ -48,7 +48,7 @@ public class LogInController {
                     control.mainLoop();
 
                 }else{
-                    lView.logInAttempt(false,u);
+                    lView.logInAttempt(false);
                 }
 
             }else if(message.getClass() == SignUpMessage.class){
@@ -57,14 +57,14 @@ public class LogInController {
 
                 User u = new User(user,pass,new BankAccount("","",50.00));
                 if(admin.addUser(u)){
-                    lView.signUpAttempt(true,u);
+                    lView.signUpAttempt(true);
 
                     HomePageView hView = new HomePageView(u.getTransactionIterator(), queue);
                     HomePageController control = new HomePageController(queue, u, admin, hView);
                     lView.dispose();
                     control.mainLoop();
                 }else{
-                    lView.signUpAttempt(false,u);
+                    lView.signUpAttempt(false);
                 }
             }
             System.out.println("TEST");
