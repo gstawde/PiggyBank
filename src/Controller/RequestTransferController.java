@@ -133,7 +133,7 @@ public class RequestTransferController {
 
             else if(message.getClass() == SettingsPageMessage.class)
             {
-                SettingsView view = new SettingsView(queue, user, user.getBankAccount().getBalance(),admin);
+                SettingsView view = new SettingsView(queue, user.getUsername(), user.getBankAccount().getBalance(),admin);
                 SettingsController c = new SettingsController(queue, admin, user, view);
                 RTview.dispose();
                 c.mainLoop();

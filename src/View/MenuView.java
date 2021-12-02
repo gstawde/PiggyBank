@@ -97,7 +97,7 @@ public class MenuView implements ActionListener {
             //newFrame = new SettingsView(queue, user, user.getBankAccount().getBalance(),admin);
             //queue.add(m);
             BlockingQueue<Message> queues = new LinkedBlockingQueue<>();
-            SettingsView view = new SettingsView(queues, user, user.getBankAccount().getBalance(),admin);
+            SettingsView view = new SettingsView(queues, user.getUsername(), user.getBankAccount().getBalance(),admin);
             SettingsController c = new SettingsController(queues, admin, user, view);
             c.mainLoop();
 
