@@ -49,7 +49,7 @@ public class SettingsView extends JFrame
 
        requestOrTransfer = new JButton("Request/Transfer");
        requestOrTransfer.setBounds(0,0,250,40);
-       requestOrTransfer.setForeground(accentPink);
+       requestOrTransfer.setBackground(accentPink);
        requestOrTransfer.setFont(titleText);
 
        requestOrTransfer.addActionListener(e -> {
@@ -91,6 +91,7 @@ public class SettingsView extends JFrame
 
        updateNameButton.addActionListener(e -> {
            String str = updateNameText.getText();
+           this.userNameLabel.setText("User Name: " + str);
            try {
                Message msg = new UpdateUsernameMessage(str);
                queue.put(msg);
