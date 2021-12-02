@@ -4,11 +4,9 @@ import java.util.HashMap;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import Controller.Messages.Message;
-import Controller.Messages.RequestMessage;
-import Controller.Messages.SettingsPageMessage;
-import Controller.Messages.TransferMessage;
+import Controller.Messages.*;
 import Model.*;
+import View.HomePageView;
 import View.RequestTransferView;
 import View.SettingsView;
 
@@ -137,6 +135,13 @@ public class RequestTransferController {
             {
                 SettingsView view = new SettingsView(queue, user.getUsername(), user.getBankAccount().getBalance(),admin);
                 SettingsController c = new SettingsController(queue, admin, user, view);
+                RTview.dispose();
+                c.mainLoop();
+            }
+            else if(message.getClass() == HomePageMessage.class)
+            {
+                HomePageView view = new HomePageView(user.getTransactionIterator(),queue);
+                HomePageController c = new HomePageController(queue, user, admin, view);
                 RTview.dispose();
                 c.mainLoop();
             }

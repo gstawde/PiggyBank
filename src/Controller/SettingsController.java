@@ -100,6 +100,14 @@ public class SettingsController {
                 settingsView.dispose();
                 RTcontroller.mainLoop();
             }
+            else if(message.getClass() == HomePageMessage.class)
+            {
+                HomePageView view = new HomePageView(user.getTransactionIterator(),queue);
+                HomePageController c = new HomePageController(queue, user, admin, view);
+                settingsView.dispose();
+                c.mainLoop();
+            }
+
 
         }
     }
