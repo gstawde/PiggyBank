@@ -43,7 +43,7 @@ public class RequestTransferView extends JFrame {
         title.setFont(titleText);
         title.setForeground(accentPink);
 
-        homePage = new JButton("Home Page");
+        homePage = new JButton("Home");
         homePage.setBounds(0,0,150,40);
         homePage.setBackground(accentPink);
         homePage.setFont(titleText);
@@ -123,6 +123,7 @@ public class RequestTransferView extends JFrame {
         this.add(invalidAmount);
         this.add(insufficientFunds);
         this.add(settings);
+        this.add(homePage);
       //  MenuView mv = new MenuView(this,u,queue,a);
 
         this.setLayout(null);
