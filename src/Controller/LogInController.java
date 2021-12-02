@@ -1,12 +1,13 @@
 package Controller;
 
+import Controller.Messages.Message;
+import Controller.Messages.SignInMessage;
+import Controller.Messages.SignUpMessage;
 import Model.Admin;
 import Model.BankAccount;
 import Model.User;
 import View.LogInView;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -19,6 +20,8 @@ public class LogInController {
         this.queue = queue;
         this.admin = admin;
         this.lView = lView;
+
+        mainLoop();
     }
 
     public void mainLoop() {
@@ -52,6 +55,7 @@ public class LogInController {
                     lView.signUpAttempt(false,u);
                 }
             }
+            System.out.println("TEST");
         }
     }
 

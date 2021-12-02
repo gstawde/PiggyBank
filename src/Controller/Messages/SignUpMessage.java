@@ -1,4 +1,4 @@
-package Controller;
+package Controller.Messages;
 
 public class SignUpMessage implements Message{
     String s;

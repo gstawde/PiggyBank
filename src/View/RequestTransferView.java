@@ -1,16 +1,14 @@
 package View;
 
-import Controller.Message;
-import Controller.RequestMessage;
-import Controller.TransferMessage;
+import Controller.Messages.Message;
+import Controller.Messages.RequestMessage;
+import Controller.Messages.TransferMessage;
+import Model.Admin;
 import Model.User;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
 
 public class RequestTransferView extends JFrame {
     public JLabel title;
@@ -34,7 +32,7 @@ public class RequestTransferView extends JFrame {
 
     private BlockingQueue<Message> queue;
 
-    public RequestTransferView(BlockingQueue<Message> queue, User u) {
+    public RequestTransferView(BlockingQueue<Message> queue, User u, Admin a) {
         this.setLocation(0, 0);
         // BASIC PAGE STYLING
         this.getContentPane().setBackground(background);
@@ -61,12 +59,12 @@ public class RequestTransferView extends JFrame {
 
         request = new JButton("Request");
         request.setBounds(175, 250, 150, 25);
-        request.setForeground(accentBlue);
+        request.setBackground(accentPink);
         request.setFont(headerText);
 
         transfer = new JButton("Transfer");
         transfer.setBounds(175, 300, 150, 25);
-        transfer.setForeground(accentBlue);
+        transfer.setBackground(accentPink);
         transfer.setFont(headerText);
 
         invalidUserName = new JLabel("Invalid UserName");
@@ -96,7 +94,7 @@ public class RequestTransferView extends JFrame {
         this.add(invalidUserName);
         this.add(invalidAmount);
         this.add(insufficientFunds);
-        MenuView mv = new MenuView(this,u,queue);
+        MenuView mv = new MenuView(this,u,queue,a);
 
         this.setLayout(null);
         this.setVisible(true);

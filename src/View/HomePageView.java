@@ -13,15 +13,12 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 
-import Controller.Message;
-import Controller.NavBarUseMessage;
+import Controller.Messages.Message;
+import Model.Admin;
 import Model.BankAccount;
 import Model.User;
 
@@ -42,9 +39,8 @@ public class HomePageView extends JFrame{
     final Font titleText = new Font("Modern No. 20", Font.PLAIN, 30);
     final Font headerText = new Font("Modern No. 20", Font.PLAIN, 20);
 
-    private BlockingQueue<Message> queue = new LinkedBlockingQueue<>();
 
-    public HomePageView(User user){
+    public HomePageView(User user, Admin admin, BlockingQueue queue){
 
         this.user = user;
 
@@ -54,7 +50,7 @@ public class HomePageView extends JFrame{
 
         // PAGE HEADER
         // navbar:
-        MenuView mv = new MenuView(this,user,queue);
+        MenuView mv = new MenuView(this,user,queue,admin);
 
         // spacing:
         this.add(Box.createVerticalStrut(50));
@@ -115,11 +111,16 @@ public class HomePageView extends JFrame{
     }
 
     public static void main(String[] a){
+        Admin admin = new Admin();
+
         User u = new User("s", "a", new BankAccount("sm","a",500.00));
         User b = new User("b","a", new BankAccount("b","a",60));
+        admin.addUser(u);
+        admin.addUser(b);
         u.payUser(50,b);
         b.payUser(20,u);
-        HomePageView v = new HomePageView(u);
+        BlockingQueue<Message> queue = new LinkedBlockingQueue<>();
+        HomePageView v = new HomePageView(u,admin,queue);
 
     }
 
