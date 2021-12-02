@@ -62,7 +62,7 @@ public class SettingsView extends JFrame
            }
        });
 
-       homePage = new JButton("Home Page");
+       homePage = new JButton("Home");
        homePage.setBounds(450,0,150,40);
        homePage.setBackground(accentPink);
        homePage.setFont(titleText);
@@ -214,6 +214,7 @@ public class SettingsView extends JFrame
        this.add(deleteFail);
        this.add(logOutButton);
        this.add(requestOrTransfer);
+       this.add(homePage);
 
      //  System.out.println("1");
      //  MenuView mv = new MenuView(this,user,queue,admin);
