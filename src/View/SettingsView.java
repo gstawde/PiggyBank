@@ -26,6 +26,7 @@ public class SettingsView extends JFrame
    public JTextField updateNameText;
    public JPasswordField passwordText;
    private JButton requestOrTransfer;
+   private JButton homePage;
 
    private BlockingQueue<Message> queue;
 
@@ -58,6 +59,20 @@ public class SettingsView extends JFrame
                queue.put(msg);
            } catch (InterruptedException exception) {
                // do nothing
+           }
+       });
+
+       homePage = new JButton("Home Page");
+       homePage.setBounds(450,0,150,40);
+       homePage.setBackground(accentPink);
+       homePage.setFont(titleText);
+
+       homePage.addActionListener(e -> {
+           try{
+               Message msg = new HomePageMessage();
+               queue.put(msg);
+           } catch (InterruptedException exception){
+               //do nothing
            }
        });
 

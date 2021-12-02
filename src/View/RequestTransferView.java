@@ -1,9 +1,6 @@
 package View;
 
-import Controller.Messages.Message;
-import Controller.Messages.RequestMessage;
-import Controller.Messages.TransferMessage;
-import Controller.Messages.SettingsPageMessage;
+import Controller.Messages.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,6 +17,7 @@ public class RequestTransferView extends JFrame {
     public JButton request;
     public JButton transfer;
     JButton settings;
+    JButton homePage;
 
     // BASIC PAGE STYLING
     final Color background = Color.decode("#272727");
@@ -45,8 +43,22 @@ public class RequestTransferView extends JFrame {
         title.setFont(titleText);
         title.setForeground(accentPink);
 
+        homePage = new JButton("Home Page");
+        homePage.setBounds(0,0,150,40);
+        homePage.setBackground(accentPink);
+        homePage.setFont(titleText);
+
+        homePage.addActionListener(e -> {
+            try{
+                Message msg = new HomePageMessage();
+                queue.put(msg);
+            } catch (InterruptedException exception){
+                //do nothing
+            }
+        });
+
         settings = new JButton("Setting");
-        settings.setBounds(0,0,150,40);
+        settings.setBounds(0,80,150,40);
         settings.setBackground(accentPink);
         settings.setFont(titleText);
 
@@ -58,6 +70,8 @@ public class RequestTransferView extends JFrame {
                 // do nothing
             }
         });
+
+
 
         success = new JLabel("Process Success");
         success.setBounds(175, 50, 150, 25);
