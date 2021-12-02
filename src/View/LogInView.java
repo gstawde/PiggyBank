@@ -79,11 +79,13 @@ public class LogInView extends JFrame{
 
         fail =new JLabel("Sign In Failed");
         fail.setBounds(215,400,100,25);
+        fail.setForeground(accentPink);
         fail.setVisible(false);
         this.add(fail);
 
         fail2 =new JLabel("Username Already Exists");
         fail2.setBounds(175,400,300,25);
+        fail2.setForeground(accentPink);
         fail2.setVisible(false);
         this.add(fail2);
 
@@ -116,20 +118,14 @@ public class LogInView extends JFrame{
 
     public void logInAttempt(boolean success,User u){
 
-        if(success){
-            HomePageView hpv = new HomePageView(u.getTransactionIterator(),queue);
-            this.dispose();
-        }else{
+        if(!success){
             this.fail.setVisible(true);
             this.fail2.setVisible(false);
         }
     }
 
     public void signUpAttempt(boolean success, User u){
-        if(success){
-            HomePageView hpv = new HomePageView(u.getTransactionIterator(),queue);
-            this.dispose();
-        }else{
+        if(!success){
             this.fail2.setVisible(true);
             this.fail.setVisible(false);
         }
