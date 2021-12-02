@@ -1,4 +1,4 @@
-package Controller;
+package Controller.Messages;
 
 import Controller.Messages.Message;
 

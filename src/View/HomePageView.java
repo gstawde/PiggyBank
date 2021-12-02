@@ -13,14 +13,13 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Iterator;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 
 import Controller.Messages.Message;
-import Controller.RequestOrTransferMessage;
-import Controller.SettingsPageMessage;
+import Controller.Messages.RequestOrTransferMessage;
+import Controller.Messages.SettingsPageMessage;
 import Model.*;
 
 public class HomePageView extends JFrame{

@@ -4,7 +4,7 @@ import java.awt.*;
 import java.util.concurrent.BlockingQueue;
 
 import Controller.Messages.*;
-import Controller.RequestOrTransferMessage;
+import Controller.Messages.RequestOrTransferMessage;
 import Model.*;
 
 public class SettingsView extends JFrame
