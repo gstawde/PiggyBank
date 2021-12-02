@@ -3,7 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.concurrent.BlockingQueue;
 
-import Controller.*;
+import Controller.Messages.*;
 import Model.*;
 
 public class SettingsView extends JFrame
@@ -35,7 +35,7 @@ public class SettingsView extends JFrame
    final Font titleText = new Font("Modern No. 20", Font.PLAIN, 30);
    final Font headerText = new Font("Modern No. 20", Font.PLAIN, 20);
 
-   public SettingsView(BlockingQueue<Message> queue, User user, double balance)
+   public SettingsView(BlockingQueue<Message> queue, User user, double balance, Admin admin)
    {
        this.queue = queue;
 
@@ -68,7 +68,7 @@ public class SettingsView extends JFrame
        updateNameButton = new JButton("Update User Name");
        updateNameButton.setBounds(0,190,170,25);
        updateNameButton.setFont(paragraphText);
-       updateNameButton.setForeground(accentPink);
+       updateNameButton.setBackground(accentPink);
 
        updateNameText = new JTextField(20);
        updateNameText.setBounds(180,190,150,25);
@@ -98,7 +98,7 @@ public class SettingsView extends JFrame
        updatePasswordButton = new JButton("Update Password");
        updatePasswordButton.setBounds(0,250,170,25);
        updatePasswordButton.setFont(paragraphText);
-       updatePasswordButton.setForeground(accentPink);
+       updatePasswordButton.setBackground(accentPink);
 
        passwordText = new JPasswordField(20);
        passwordText.setBounds(180,250, 150, 25);
@@ -128,7 +128,7 @@ public class SettingsView extends JFrame
        deleteAccountButton = new JButton("Delete Account");
        deleteAccountButton.setBounds(0,310, 170,25);
        deleteAccountButton.setFont(paragraphText);
-       deleteAccountButton.setForeground(accentPink);
+       deleteAccountButton.setBackground(accentPink);
 
        deleteAccountButton.addActionListener(e -> {
            try {
@@ -154,7 +154,7 @@ public class SettingsView extends JFrame
        logOutButton = new JButton("Log Out");
        logOutButton.setBounds(160, 370,150,25);
        logOutButton.setFont(paragraphText);
-       logOutButton.setForeground(accentPink);
+       logOutButton.setBackground(accentPink);
 
        logOutButton.addActionListener(e -> {
            try {
@@ -182,10 +182,12 @@ public class SettingsView extends JFrame
        this.add(deleteFail);
        this.add(logOutButton);
 
-       MenuView mv = new MenuView(this,user,queue);
+       System.out.println("1");
+       MenuView mv = new MenuView(this,user,queue,admin);
 
        this.setLayout(null);
        this.setVisible(true);
+       System.out.println("2");
    }
 
    public void updateNameSuccessFail(boolean val)

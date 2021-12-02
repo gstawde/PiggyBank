@@ -1,5 +1,6 @@
 package Controller;
 
+import Controller.Messages.*;
 import Model.*;
 import View.*;
 
@@ -24,9 +25,13 @@ public class SettingsController {
     public void mainLoop()
     {
         while (settingsView.isDisplayable()) {
+            System.out.println("TEST SETTING");
             Message message = null;
+
             try {
+                System.out.println("TEST SETTINGS 1");
                 message = queue.take();
+                System.out.println("TEST SETTINGS 2");
             } catch (InterruptedException exception) {
                 // do nothing
             }
@@ -162,7 +167,7 @@ public class SettingsController {
         admin.addUser(u);
         admin.addUser(b);
         BlockingQueue<Message> queue = new LinkedBlockingQueue<>();
-        SettingsView view = new SettingsView(queue, u, u.getBankAccount().getBalance());
+        SettingsView view = new SettingsView(queue, u, u.getBankAccount().getBalance(),admin);
         SettingsController c = new SettingsController(queue, admin, u, view);
         c.mainLoop();
     }

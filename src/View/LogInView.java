@@ -5,12 +5,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
 
 
-import Controller.Message;
-import Controller.SignInMessage;
-import Controller.SignUpMessage;
+import Controller.Messages.Message;
+import Controller.Messages.SignInMessage;
+import Controller.Messages.SignUpMessage;
 import Model.Admin;
 import Model.User;
 
@@ -118,7 +117,7 @@ public class LogInView extends JFrame{
     public void logInAttempt(boolean success,User u){
 
         if(success){
-            HomePageView hpv = new HomePageView(u);
+            HomePageView hpv = new HomePageView(u,a,queue);
             this.dispose();
         }else{
             this.fail.setVisible(true);
@@ -128,7 +127,7 @@ public class LogInView extends JFrame{
 
     public void signUpAttempt(boolean success, User u){
         if(success){
-            HomePageView hpv = new HomePageView(u);
+            HomePageView hpv = new HomePageView(u,a,queue);
             this.dispose();
         }else{
             this.fail2.setVisible(true);
@@ -136,8 +135,8 @@ public class LogInView extends JFrame{
         }
     }
 
-    public static void main(String[] a){
+   /* public static void main(String[] a){
         Admin admin = new Admin();
         new LogInView(admin, new LinkedBlockingQueue());
-    }
+    }*/
 }
