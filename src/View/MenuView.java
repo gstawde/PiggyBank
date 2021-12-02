@@ -1,7 +1,9 @@
 package View;
 
-import Controller.Message;
-import Controller.NavBarUseMessage;
+import Controller.*;
+import Controller.Messages.Message;
+import Controller.Messages.NavBarUseMessage;
+import Model.Admin;
 import Model.User;
 
 import javax.swing.*;
@@ -9,6 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class MenuView implements ActionListener {
     // BASIC PAGE STYLING
@@ -27,13 +30,14 @@ public class MenuView implements ActionListener {
     public JFrame j;
     User user;
     BlockingQueue<Message> queue;
+    Admin admin;
 
-
-    public MenuView(JFrame j, User user,BlockingQueue<Message> queue){
+    public MenuView(JFrame j, User user, BlockingQueue<Message> queue, Admin admin){
 
         this.j = j;
         this.user = user;
         this.queue = queue;
+        this.admin = admin;
 
         // PAGE HEADER
         // navbar:
@@ -72,23 +76,36 @@ public class MenuView implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Message m;
         JFrame newFrame;
+
         if (e.getSource() == homePage) {
             m = new NavBarUseMessage("\'Home\' menu item clicked");
-            newFrame = new HomePageView(user);
+            newFrame = new HomePageView(user, admin,queue);
             newFrame.setVisible(true);
             queue.add(m);
         } else if (e.getSource() == requestOrTransfer) {
             m = new NavBarUseMessage("\'Request or Transfer\' menu item clicked");
-            newFrame = new RequestTransferView(queue,user);
-            newFrame.setVisible(true);
+            newFrame = new RequestTransferView(queue,user,admin);
+
+            RequestTransferController sc = new RequestTransferController(queue, admin, user, (RequestTransferView) newFrame);
+            sc.mainLoop();
+
+
+            //newFrame.setVisible(true);
             queue.add(m);
         } else if (e.getSource() == settings) {
             m = new NavBarUseMessage("\'Settings\' menu item clicked");
-            newFrame = new SettingsView(queue, user, user.getBankAccount().getBalance());
-            newFrame.setVisible(true);
-            queue.add(m);
+            //newFrame = new SettingsView(queue, user, user.getBankAccount().getBalance(),admin);
+            //queue.add(m);
+            BlockingQueue<Message> queues = new LinkedBlockingQueue<>();
+            SettingsView view = new SettingsView(queues, user, user.getBankAccount().getBalance(),admin);
+            SettingsController c = new SettingsController(queues, admin, user, view);
+            c.mainLoop();
+
+
+            //newFrame.setVisible(true);
+
         }
-        j.setVisible(false);
+        j.dispose();
     }
 
 

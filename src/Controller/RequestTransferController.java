@@ -1,13 +1,12 @@
 package Controller;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import Controller.Messages.Message;
+import Controller.Messages.RequestMessage;
+import Controller.Messages.TransferMessage;
 import Model.*;
 import View.RequestTransferView;
 
@@ -143,7 +142,7 @@ public class RequestTransferController {
         admin.addUser(u);
         admin.addUser(b);
         BlockingQueue<Message> queue = new LinkedBlockingQueue<>();
-        RequestTransferView RTview = new RequestTransferView(queue,u);
+        RequestTransferView RTview = new RequestTransferView(queue,u,admin);
         RequestTransferController RTcontroller = new RequestTransferController(queue,admin,u,RTview);
         RTcontroller.mainLoop();
     }

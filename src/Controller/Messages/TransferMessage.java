@@ -1,4 +1,4 @@
-package Controller;
+package Controller.Messages;
 
 
 public class TransferMessage implements Message{
