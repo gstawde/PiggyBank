@@ -38,7 +38,7 @@ public class RequestTransferView extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setDefaultLookAndFeelDecorated(true);
 
-        title = new JLabel("Request/Transfer");
+        title = new JLabel("Transfer");
         title.setBounds(200, 10, 250, 25);
         title.setFont(titleText);
         title.setForeground(accentPink);
@@ -117,7 +117,7 @@ public class RequestTransferView extends JFrame {
         this.add(success);
         this.add(username);
         this.add(amount);
-        this.add(request);
+        //this.add(request);
         this.add(transfer);
         this.add(invalidUserName);
         this.add(invalidAmount);

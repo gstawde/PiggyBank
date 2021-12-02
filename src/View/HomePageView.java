@@ -55,7 +55,7 @@ public class HomePageView extends JFrame{
 
         //MenuView mv = new MenuView(this,user,queue,admin);
 
-        requestOrTransfer = new JButton("Request/Transfer");
+        requestOrTransfer = new JButton("Transfer");
         //requestOrTransfer.setBounds(0,0,250,40);
         requestOrTransfer.setBackground(accentPink);
         requestOrTransfer.setFont(titleText);
