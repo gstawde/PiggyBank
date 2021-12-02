@@ -58,7 +58,7 @@ public class HomePageView extends JFrame{
 
         requestOrTransfer = new JButton("Request/Transfer");
         //requestOrTransfer.setBounds(0,0,250,40);
-        requestOrTransfer.setForeground(accentPink);
+        requestOrTransfer.setBackground(accentPink);
         requestOrTransfer.setFont(titleText);
 
         requestOrTransfer.addActionListener(e -> {
@@ -72,7 +72,7 @@ public class HomePageView extends JFrame{
 
         settings = new JButton("Setting");
        // settings.setBounds(0,0,150,40);
-        settings.setForeground(accentPink);
+        settings.setBackground(accentPink);
         settings.setFont(titleText);
 
         settings.addActionListener(e -> {
@@ -101,7 +101,7 @@ public class HomePageView extends JFrame{
         this.add(Box.createVerticalStrut(50));
 
         // HOME PAGE BASIC CONTENT
-        this.transactionsSummary = new JLabel("Transactions Summary");
+        this.transactionsSummary = new JLabel("Transactions Summary",SwingConstants.CENTER);
         transactionsSummary.setFont(titleText);
         transactionsSummary.setForeground(accentPink);
         this.add(transactionsSummary);
