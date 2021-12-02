@@ -4,7 +4,7 @@ import java.awt.*;
 import java.util.concurrent.BlockingQueue;
 
 import Controller.Messages.*;
-import Controller.RequestOrTransferMessage;
+import Controller.Messages.RequestOrTransferMessage;
 import Model.*;
 
 public class SettingsView extends JFrame
@@ -13,25 +13,27 @@ public class SettingsView extends JFrame
    private JLabel bankAccInfoLabel;
    private JLabel userNameLabel;
    private JLabel bankBalanceLabel;
-   private JLabel updateNameSuccess;
-   private JLabel updateNameFail;
-   private JLabel updatePasswordSuccess;
-   private JLabel updatePasswordFail;
-   private JLabel deleteSuccess;
-   private JLabel deleteFail;
-   private JButton updateNameButton;
-   private JButton updatePasswordButton;
-   private JButton deleteAccountButton;
-   private JButton logOutButton;
-   private JTextField updateNameText;
-   private JPasswordField passwordText;
+   public JLabel updateNameSuccess;
+   public JLabel updateNameFail;
+   public JLabel updatePasswordSuccess;
+   public JLabel updatePasswordFail;
+   public JLabel deleteSuccess;
+   public JLabel deleteFail;
+   public JButton updateNameButton;
+   public JButton updatePasswordButton;
+   public JButton deleteAccountButton;
+   public JButton logOutButton;
+   public JTextField updateNameText;
+   public JPasswordField passwordText;
    private JButton requestOrTransfer;
+   private JButton homePage;
 
    private BlockingQueue<Message> queue;
 
-   //styling variables
    final Color background = Color.decode("#272727");
    final Color accentPink = Color.decode("#E6BEAE");
+   final Color genericText = Color.decode("#FFFFFF");
+   final Color accentBlue = Color.decode("#A9BCD0");
    final Font paragraphText = new Font("Modern No. 20", Font.PLAIN, 16);
    final Font titleText = new Font("Modern No. 20", Font.PLAIN, 30);
    final Font headerText = new Font("Modern No. 20", Font.PLAIN, 20);
@@ -40,26 +42,37 @@ public class SettingsView extends JFrame
    {
        this.queue = queue;
 
-       //setting the base of the Jframe
        this.setLocation(0,0);
        this.setSize(600,600);
        this.getContentPane().setBackground(background);
        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        this.setDefaultLookAndFeelDecorated(true);
 
-
-       requestOrTransfer = new JButton("Request/Transfer");
+       requestOrTransfer = new JButton("Transfer");
        requestOrTransfer.setBounds(0,0,250,40);
        requestOrTransfer.setBackground(accentPink);
        requestOrTransfer.setFont(titleText);
 
-       //ActionListener for requestOrTransfer button
        requestOrTransfer.addActionListener(e -> {
            try {
                Message msg = new RequestOrTransferMessage();
                queue.put(msg);
            } catch (InterruptedException exception) {
                // do nothing
+           }
+       });
+
+       homePage = new JButton("Home");
+       homePage.setBounds(450,0,150,40);
+       homePage.setBackground(accentPink);
+       homePage.setFont(titleText);
+
+       homePage.addActionListener(e -> {
+           try{
+               Message msg = new HomePageMessage();
+               queue.put(msg);
+           } catch (InterruptedException exception){
+               //do nothing
            }
        });
 
@@ -91,10 +104,8 @@ public class SettingsView extends JFrame
        updateNameText = new JTextField(20);
        updateNameText.setBounds(180,190,150,25);
 
-       //ActionListener for updateNameButton button
        updateNameButton.addActionListener(e -> {
            String str = updateNameText.getText();
-           this.userNameLabel.setText("User Name: " + str);
            try {
                Message msg = new UpdateUsernameMessage(str);
                queue.put(msg);
@@ -123,7 +134,6 @@ public class SettingsView extends JFrame
        passwordText = new JPasswordField(20);
        passwordText.setBounds(180,250, 150, 25);
 
-       //ActionListener for the updatePasswordButton button
        updatePasswordButton.addActionListener(e -> {
            String str = passwordText.getText();
            try {
@@ -151,7 +161,6 @@ public class SettingsView extends JFrame
        deleteAccountButton.setFont(paragraphText);
        deleteAccountButton.setBackground(accentPink);
 
-       //ActionListener for the deleteAccountButton button
        deleteAccountButton.addActionListener(e -> {
            try {
                Message msg = new DeleteAccountMessage();
@@ -178,7 +187,6 @@ public class SettingsView extends JFrame
        logOutButton.setFont(paragraphText);
        logOutButton.setBackground(accentPink);
 
-       //ActionListener for logOutButton
        logOutButton.addActionListener(e -> {
            try {
                Message msg = new LogOutMessage();
@@ -188,7 +196,6 @@ public class SettingsView extends JFrame
            }
        });
 
-       //add all the components to the frame
        this.add(settingLabel);
        this.add(bankAccInfoLabel);
        this.add(bankBalanceLabel);
@@ -206,16 +213,21 @@ public class SettingsView extends JFrame
        this.add(deleteFail);
        this.add(logOutButton);
        this.add(requestOrTransfer);
+       this.add(homePage);
+
+     //  System.out.println("1");
+     //  MenuView mv = new MenuView(this,user,queue,admin);
 
        this.setLayout(null);
        this.setVisible(true);
+       System.out.println("2");
    }
 
-   //update settingsView to prompt user if username updated success or not
-   public void updateNameSuccessFail(boolean val)
+   public void updateNameSuccessFail(boolean val,String str)
    {
-       if(val == true)
+       if(val)
        {
+           this.userNameLabel.setText("Username: "+str);
            this.updateNameSuccess.setVisible(true);
            this.updateNameFail.setVisible(false);
        }
@@ -226,7 +238,6 @@ public class SettingsView extends JFrame
        }
    }
 
-    //update settingsView to prompt user if password updated success or not
     public void updatePasswordSuccessFail(boolean val)
     {
         if(val == true)
@@ -241,7 +252,6 @@ public class SettingsView extends JFrame
         }
     }
 
-    //update settingsView to prompt user if the account successfully deleted or not
     public void deleteSuccessFail(boolean val)
     {
         if(val == true)
@@ -255,4 +265,13 @@ public class SettingsView extends JFrame
             this.deleteSuccess.setVisible(false);
         }
     }
+
+   /*
+   public static void main(String[] args)
+   {
+       User user = new User("Jun Wu", "abc", new BankAccount("Jun", "Wu", 500));
+       new SettingsView(user.getUsername(), user.getBankAccount().getBalance());
+   }
+
+    */
 }

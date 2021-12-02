@@ -4,10 +4,9 @@ import java.util.HashMap;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import Controller.Messages.Message;
-import Controller.Messages.RequestMessage;
-import Controller.Messages.TransferMessage;
+import Controller.Messages.*;
 import Model.*;
+import View.HomePageView;
 import View.RequestTransferView;
 import View.SettingsView;
 
@@ -17,6 +16,7 @@ public class RequestTransferController {
      Admin admin;
      User user;
      RequestTransferView RTview;
+
 
     public RequestTransferController(BlockingQueue<Message> queue, Admin admin, User user, RequestTransferView RTview){
         this.queue = queue;
@@ -138,6 +138,13 @@ public class RequestTransferController {
                 RTview.dispose();
                 c.mainLoop();
             }
+            else if(message.getClass() == HomePageMessage.class)
+            {
+                HomePageView view = new HomePageView(user.getTransactionIterator(),queue);
+                HomePageController c = new HomePageController(queue, user, admin, view);
+                RTview.dispose();
+                c.mainLoop();
+            }
         }
     }
 
@@ -157,4 +164,4 @@ public class RequestTransferController {
     }
 
 }
-//Chint Patel | patelchint2002@gmail.com
+// Chint Patel | patelchint2002@gmail.com

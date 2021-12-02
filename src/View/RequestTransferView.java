@@ -1,12 +1,6 @@
 package View;
 
-import Controller.Messages.Message;
-import Controller.Messages.RequestMessage;
-import Controller.Messages.TransferMessage;
-import Controller.RequestOrTransferMessage;
-import Controller.SettingsPageMessage;
-import Model.Admin;
-import Model.User;
+import Controller.Messages.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,6 +17,7 @@ public class RequestTransferView extends JFrame {
     public JButton request;
     public JButton transfer;
     JButton settings;
+    JButton homePage;
 
     // BASIC PAGE STYLING
     final Color background = Color.decode("#272727");
@@ -43,13 +38,27 @@ public class RequestTransferView extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setDefaultLookAndFeelDecorated(true);
 
-        title = new JLabel("Request/Transfer");
+        title = new JLabel("Transfer");
         title.setBounds(200, 10, 250, 25);
         title.setFont(titleText);
         title.setForeground(accentPink);
 
+        homePage = new JButton("Home");
+        homePage.setBounds(0,0,150,40);
+        homePage.setBackground(accentPink);
+        homePage.setFont(titleText);
+
+        homePage.addActionListener(e -> {
+            try{
+                Message msg = new HomePageMessage();
+                queue.put(msg);
+            } catch (InterruptedException exception){
+                //do nothing
+            }
+        });
+
         settings = new JButton("Setting");
-        settings.setBounds(0,0,150,40);
+        settings.setBounds(0,80,150,40);
         settings.setBackground(accentPink);
         settings.setFont(titleText);
 
@@ -61,6 +70,8 @@ public class RequestTransferView extends JFrame {
                 // do nothing
             }
         });
+
+
 
         success = new JLabel("Process Success");
         success.setBounds(175, 50, 150, 25);
@@ -106,12 +117,13 @@ public class RequestTransferView extends JFrame {
         this.add(success);
         this.add(username);
         this.add(amount);
-        this.add(request);
+        //this.add(request);
         this.add(transfer);
         this.add(invalidUserName);
         this.add(invalidAmount);
         this.add(insufficientFunds);
         this.add(settings);
+        this.add(homePage);
       //  MenuView mv = new MenuView(this,u,queue,a);
 
         this.setLayout(null);
