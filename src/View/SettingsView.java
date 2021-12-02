@@ -48,7 +48,7 @@ public class SettingsView extends JFrame
        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        this.setDefaultLookAndFeelDecorated(true);
 
-       requestOrTransfer = new JButton("Request/Transfer");
+       requestOrTransfer = new JButton("Transfer");
        requestOrTransfer.setBounds(0,0,250,40);
        requestOrTransfer.setBackground(accentPink);
        requestOrTransfer.setFont(titleText);
@@ -106,7 +106,6 @@ public class SettingsView extends JFrame
 
        updateNameButton.addActionListener(e -> {
            String str = updateNameText.getText();
-           this.userNameLabel.setText("User Name: " + str);
            try {
                Message msg = new UpdateUsernameMessage(str);
                queue.put(msg);
@@ -224,10 +223,11 @@ public class SettingsView extends JFrame
        System.out.println("2");
    }
 
-   public void updateNameSuccessFail(boolean val)
+   public void updateNameSuccessFail(boolean val,String str)
    {
-       if(val == true)
+       if(val)
        {
+           this.userNameLabel.setText("Username: "+str);
            this.updateNameSuccess.setVisible(true);
            this.updateNameFail.setVisible(false);
        }

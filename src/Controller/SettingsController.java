@@ -43,16 +43,16 @@ public class SettingsController {
             if(message.getClass() == UpdateUsernameMessage.class) {
                 // if update username was clicked
                 UpdateUsernameMessage newName = (UpdateUsernameMessage) message;
-                if(newName.getNewUserName().length() == 0 || !admin.getUsernameToUser().containsKey(user.getUsername()))
+                if(newName.getNewUserName().length() == 0 || admin.getUsernameToUser().containsKey(newName.getNewUserName()))
                 {
-                    settingsView.updateNameSuccessFail(false);
+                    settingsView.updateNameSuccessFail(false,newName.getNewUserName());
                 }
                 else
                 {
                     admin.deleteUser(user.getUsername());
                     user.setUsername(newName.getNewUserName());
                     admin.addUser(user);
-                    settingsView.updateNameSuccessFail(true);
+                    settingsView.updateNameSuccessFail(true,newName.getNewUserName());
                 }
             }
 
@@ -77,6 +77,10 @@ public class SettingsController {
                 if(admin.deleteUser(user.getUsername()))
                 {
                     settingsView.deleteSuccessFail(true);
+                    LogInView lTview = new LogInView(admin, queue);
+                    LogInController logIn = new LogInController(queue,admin,lTview);
+                    settingsView.dispose();
+                    logIn.mainLoop();
                 }
                 else
                 {
