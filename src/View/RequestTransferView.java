@@ -35,7 +35,7 @@ public class RequestTransferView extends JFrame {
 
     private BlockingQueue<Message> queue;
 
-    public RequestTransferView(BlockingQueue<Message> queue, User u, Admin a) {
+    public RequestTransferView(BlockingQueue<Message> queue) {
         this.setLocation(0, 0);
         // BASIC PAGE STYLING
         this.getContentPane().setBackground(background);

@@ -84,7 +84,7 @@ public class MenuView implements ActionListener {
             queue.add(m);
         } else if (e.getSource() == requestOrTransfer) {
             m = new NavBarUseMessage("\'Request or Transfer\' menu item clicked");
-            newFrame = new RequestTransferView(queue,user,admin);
+            newFrame = new RequestTransferView(queue);
 
             RequestTransferController sc = new RequestTransferController(queue, admin, user, (RequestTransferView) newFrame);
             sc.mainLoop();
