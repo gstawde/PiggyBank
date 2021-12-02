@@ -6,6 +6,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 import Controller.Messages.Message;
 import Controller.Messages.RequestMessage;
+import Controller.Messages.SettingsPageMessage;
 import Controller.Messages.TransferMessage;
 import Model.*;
 import View.RequestTransferView;
@@ -17,6 +18,7 @@ public class RequestTransferController {
      Admin admin;
      User user;
      RequestTransferView RTview;
+
 
     public RequestTransferController(BlockingQueue<Message> queue, Admin admin, User user, RequestTransferView RTview){
         this.queue = queue;
@@ -157,4 +159,4 @@ public class RequestTransferController {
     }
 
 }
-//Chint Patel | patelchint2002@gmail.com
+// Chint Patel | patelchint2002@gmail.com

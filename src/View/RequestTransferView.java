@@ -3,10 +3,7 @@ package View;
 import Controller.Messages.Message;
 import Controller.Messages.RequestMessage;
 import Controller.Messages.TransferMessage;
-import Controller.RequestOrTransferMessage;
-import Controller.SettingsPageMessage;
-import Model.Admin;
-import Model.User;
+import Controller.Messages.SettingsPageMessage;
 
 import javax.swing.*;
 import java.awt.*;

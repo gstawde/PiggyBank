@@ -4,6 +4,7 @@ import Controller.Messages.*;
 import Model.*;
 import View.*;
 
+import java.util.Iterator;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -13,9 +14,12 @@ public class SettingsController {
     Admin admin;
     User user;
     SettingsView settingsView;
+    Iterator<Transaction> iterator; // NEW CODE
+
 
     public SettingsController(BlockingQueue<Message> queue, Admin admin, User user, SettingsView settingsView)
     {
+        this.iterator = iterator;
         this.queue = queue;
         this.admin = admin;
         this.user = user;
