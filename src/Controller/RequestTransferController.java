@@ -9,6 +9,7 @@ import Controller.Messages.RequestMessage;
 import Controller.Messages.TransferMessage;
 import Model.*;
 import View.RequestTransferView;
+import View.SettingsView;
 
 public class RequestTransferController {
 
@@ -128,6 +129,14 @@ public class RequestTransferController {
                 } catch (NumberFormatException ex){
                     RTview.invalidAmount.setVisible(true);
                 }
+            }
+
+            else if(message.getClass() == SettingsPageMessage.class)
+            {
+                SettingsView view = new SettingsView(queue, user, user.getBankAccount().getBalance(),admin);
+                SettingsController c = new SettingsController(queue, admin, user, view);
+                RTview.dispose();
+                c.mainLoop();
             }
         }
     }

@@ -83,8 +83,18 @@ public class SettingsController {
             else if(message.getClass() == LogOutMessage.class)
             {
                 // log out button was clicked
-                LogInController logIn = new LogInController(queue,admin,new LogInView(admin,queue));
+                LogInView lTview = new LogInView(admin, queue);
+                LogInController logIn = new LogInController(queue,admin,lTview);
                 settingsView.dispose();
+                logIn.mainLoop();
+            }
+
+            else if(message.getClass() == RequestOrTransferMessage.class)
+            {
+                RequestTransferView RTview = new RequestTransferView(queue,user,admin);
+                RequestTransferController RTcontroller = new RequestTransferController(queue,admin,user,RTview);
+                settingsView.dispose();
+                RTcontroller.mainLoop();
             }
 
         }

@@ -4,6 +4,7 @@ import java.awt.*;
 import java.util.concurrent.BlockingQueue;
 
 import Controller.Messages.*;
+import Controller.RequestOrTransferMessage;
 import Model.*;
 
 public class SettingsView extends JFrame
@@ -24,6 +25,7 @@ public class SettingsView extends JFrame
    public JButton logOutButton;
    public JTextField updateNameText;
    public JPasswordField passwordText;
+   private JButton requestOrTransfer;
 
    private BlockingQueue<Message> queue;
 
@@ -45,8 +47,22 @@ public class SettingsView extends JFrame
        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        this.setDefaultLookAndFeelDecorated(true);
 
+       requestOrTransfer = new JButton("Request/Transfer");
+       requestOrTransfer.setBounds(0,0,250,40);
+       requestOrTransfer.setForeground(accentPink);
+       requestOrTransfer.setFont(titleText);
+
+       requestOrTransfer.addActionListener(e -> {
+           try {
+               Message msg = new RequestOrTransferMessage();
+               queue.put(msg);
+           } catch (InterruptedException exception) {
+               // do nothing
+           }
+       });
+
        settingLabel = new JLabel("Settings");
-       settingLabel.setBounds(170, 0, 160,40);
+       settingLabel.setBounds(260, 0, 160,40);
        settingLabel.setFont(titleText);
        settingLabel.setForeground(accentPink);
 
@@ -181,9 +197,10 @@ public class SettingsView extends JFrame
        this.add(deleteSuccess);
        this.add(deleteFail);
        this.add(logOutButton);
+       this.add(requestOrTransfer);
 
-       System.out.println("1");
-       MenuView mv = new MenuView(this,user,queue,admin);
+     //  System.out.println("1");
+     //  MenuView mv = new MenuView(this,user,queue,admin);
 
        this.setLayout(null);
        this.setVisible(true);
