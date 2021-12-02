@@ -50,7 +50,7 @@ public class RequestTransferView extends JFrame {
 
         settings = new JButton("Setting");
         settings.setBounds(0,0,150,40);
-        settings.setForeground(accentPink);
+        settings.setBackground(accentPink);
         settings.setFont(titleText);
 
         settings.addActionListener(e -> {

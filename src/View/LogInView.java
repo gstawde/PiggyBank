@@ -49,10 +49,10 @@ public class LogInView extends JFrame{
 
 
         title = new JLabel("Login");
-        title.setBounds(175, 20, 150, 25);
-        title.setHorizontalAlignment(JLabel.CENTER);
+        title.setBounds(0, 20, 150, 25);
         title.setForeground(accentPink);
         title.setFont(titleText);
+        title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 
         username = new JTextField("Username");
