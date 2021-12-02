@@ -91,7 +91,7 @@ public class SettingsController {
 
             else if(message.getClass() == RequestOrTransferMessage.class)
             {
-                RequestTransferView RTview = new RequestTransferView(queue,user,admin);
+                RequestTransferView RTview = new RequestTransferView(queue);
                 RequestTransferController RTcontroller = new RequestTransferController(queue,admin,user,RTview);
                 settingsView.dispose();
                 RTcontroller.mainLoop();
