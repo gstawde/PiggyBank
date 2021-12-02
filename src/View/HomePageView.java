@@ -13,6 +13,7 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Iterator;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -22,12 +23,13 @@ import Controller.RequestOrTransferMessage;
 import Controller.SettingsPageMessage;
 import Model.Admin;
 import Model.BankAccount;
+import Model.Transaction;
 import Model.User;
 
 public class HomePageView extends JFrame{
 
     User user;
-
+    Iterator<Transaction> transactionIterator;
     JTable table;
     JLabel transactionsSummary;
     JScrollPane sp;
@@ -44,9 +46,9 @@ public class HomePageView extends JFrame{
     final Font headerText = new Font("Modern No. 20", Font.PLAIN, 20);
 
 
-    public HomePageView(User user, Admin admin, BlockingQueue queue){
+    public HomePageView(Iterator<Transaction> iterator, BlockingQueue queue){
 
-        this.user = user;
+        transactionIterator = iterator;
 
         // BASIC PAGE STYLING
         this.getContentPane().setBackground(background);
@@ -115,11 +117,14 @@ public class HomePageView extends JFrame{
         String[] columnNames = {"Receiver Name",
                 "Fulfiller Name",
                  "Amount"};
-        Object[][] data = new Object[user.getTransactionHistory().size()][3];
-        for(int i = 0; i < user.getTransactionHistory().size(); i++){
-            data[i][0] = user.getTransactionHistory().get(i).getReceiver().getUsername();
-            data[i][1] = user.getTransactionHistory().get(i).getSender().getUsername();
-            data[i][2] = user.getTransactionHistory().get(i).getAmount();
+        Object[][] data = new Object[5][3];
+        int i = 0;
+        while(this.transactionIterator.hasNext() && i < 5){
+            Transaction  t = this.transactionIterator.next();
+            data[i][0] = t.getReceiver().getUsername();
+            data[i][1] = t.getSender().getUsername();
+            data[i][2] = t.getAmount();
+            i++;
         }
         this.table = new JTable(data, columnNames);
         // scroll pane:
@@ -155,7 +160,7 @@ public class HomePageView extends JFrame{
         u.payUser(50,b);
         b.payUser(20,u);
         BlockingQueue<Message> queue = new LinkedBlockingQueue<>();
-        HomePageView v = new HomePageView(u,admin,queue);
+        HomePageView v = new HomePageView(u.getTransactionHistory().iterator(), queue);
 
     }
 
