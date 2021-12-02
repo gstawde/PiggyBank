@@ -12,7 +12,7 @@ public class User implements Comparable<User>, Serializable {
     private String username;
     private String password;
     private BankAccount bankAccount;
-    private ArrayList<Transaction> transactionHistory;
+    private TransactionHistory transactionHistory;
     private ArrayList<Request> requests;
 
     //constructor
@@ -20,7 +20,7 @@ public class User implements Comparable<User>, Serializable {
         this.username = username;
         this. password = password;
         this.bankAccount = bankAccount;
-        transactionHistory = new ArrayList<>();
+        transactionHistory = new TransactionHistory();
         requests = new ArrayList<>();
     }
 
@@ -109,7 +109,11 @@ public class User implements Comparable<User>, Serializable {
      * @return transactionHistory
      */
     public ArrayList<Transaction> getTransactionHistory() {
-        return transactionHistory;
+        return transactionHistory.getTransactionHistoryList();
+    }
+
+    public TransactionsIterator getTransactionIterator() {
+        return transactionHistory.getTransactions();
     }
 
     /***

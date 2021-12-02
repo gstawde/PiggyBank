@@ -38,17 +38,17 @@ public class HomePageController
 
             if(message.getClass() == RequestOrTransferMessage.class)
             {
+                homeView.dispose();
                 RequestTransferView RTview = new RequestTransferView(queue);
                 RequestTransferController RTcontroller = new RequestTransferController(queue,admin,user,RTview);
-                homeView.dispose();
                 RTcontroller.mainLoop();
             }
 
             else if(message.getClass() == SettingsPageMessage.class)
             {
+                homeView.dispose();
                 SettingsView view = new SettingsView(queue, user.getUsername(), user.getBankAccount().getBalance(),admin);
                 SettingsController c = new SettingsController(queue, admin, user, view);
-                homeView.dispose();
                 c.mainLoop();
             }
 
