@@ -177,7 +177,7 @@ public class SettingsController {
         admin.addUser(u);
         admin.addUser(b);
         BlockingQueue<Message> queue = new LinkedBlockingQueue<>();
-        SettingsView view = new SettingsView(queue, u, u.getBankAccount().getBalance(),admin);
+        SettingsView view = new SettingsView(queue, u.getUsername(), u.getBankAccount().getBalance(),admin);
         SettingsController c = new SettingsController(queue, admin, u, view);
         c.mainLoop();
     }

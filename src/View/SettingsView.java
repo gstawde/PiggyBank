@@ -37,7 +37,7 @@ public class SettingsView extends JFrame
    final Font titleText = new Font("Modern No. 20", Font.PLAIN, 30);
    final Font headerText = new Font("Modern No. 20", Font.PLAIN, 20);
 
-   public SettingsView(BlockingQueue<Message> queue, User user, double balance, Admin admin)
+   public SettingsView(BlockingQueue<Message> queue, String username, double balance, Admin admin)
    {
        this.queue = queue;
 
@@ -71,7 +71,7 @@ public class SettingsView extends JFrame
        bankAccInfoLabel.setFont(headerText);
        bankAccInfoLabel.setForeground(accentPink);
 
-       userNameLabel = new JLabel("User Name: " + user.getUsername());
+       userNameLabel = new JLabel("User Name: " + username);
        userNameLabel.setBounds(170,90,200,35);
        userNameLabel.setFont(headerText);
        userNameLabel.setForeground(accentPink);
