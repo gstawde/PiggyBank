@@ -18,6 +18,8 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 
 import Controller.Messages.Message;
+import Controller.RequestOrTransferMessage;
+import Controller.SettingsPageMessage;
 import Model.Admin;
 import Model.BankAccount;
 import Model.User;
@@ -29,6 +31,8 @@ public class HomePageView extends JFrame{
     JTable table;
     JLabel transactionsSummary;
     JScrollPane sp;
+    JButton settings;
+    JButton requestOrTransfer;
 
     // BASIC PAGE STYLING
     final Color background = Color.decode("#272727");
@@ -50,8 +54,39 @@ public class HomePageView extends JFrame{
 
         // PAGE HEADER
         // navbar:
-        MenuView mv = new MenuView(this,user,queue,admin);
 
+        //MenuView mv = new MenuView(this,user,queue,admin);
+
+        requestOrTransfer = new JButton("Request/Transfer");
+        //requestOrTransfer.setBounds(0,0,250,40);
+        requestOrTransfer.setForeground(accentPink);
+        requestOrTransfer.setFont(titleText);
+
+        requestOrTransfer.addActionListener(e -> {
+            try {
+                Message msg = new RequestOrTransferMessage();
+                queue.put(msg);
+            } catch (InterruptedException exception) {
+                // do nothing
+            }
+        });
+
+        settings = new JButton("Setting");
+       // settings.setBounds(0,0,150,40);
+        settings.setForeground(accentPink);
+        settings.setFont(titleText);
+
+        settings.addActionListener(e -> {
+            try {
+                Message msg = new SettingsPageMessage();
+                queue.put(msg);
+            } catch (InterruptedException exception) {
+                // do nothing
+            }
+        });
+
+        this.add(requestOrTransfer);
+        this.add(settings);
         // spacing:
         this.add(Box.createVerticalStrut(50));
 

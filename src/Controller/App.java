@@ -16,6 +16,7 @@ public class App {
         admin.addUser(new User("s","a",new BankAccount("s","a",50)));
         BlockingQueue queue = new LinkedBlockingQueue();
         LogInController start = new LogInController(queue,admin,new LogInView(admin,queue));
+        start.mainLoop();
     }
 
     public static void main(String[] args) {

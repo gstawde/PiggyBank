@@ -6,6 +6,7 @@ import Controller.Messages.SignUpMessage;
 import Model.Admin;
 import Model.BankAccount;
 import Model.User;
+import View.HomePageView;
 import View.LogInView;
 
 import java.util.concurrent.BlockingQueue;
@@ -40,6 +41,12 @@ public class LogInController {
                 User u = lView.a.authenticateUser(user,pass);
                 if(u != null){
                     lView.logInAttempt(true,u);
+
+                    HomePageView hView = new HomePageView(u, admin, queue);
+                    HomePageController control = new HomePageController(queue, u, admin, hView);
+                    lView.dispose();
+                    control.mainLoop();
+
                 }else{
                     lView.logInAttempt(false,u);
                 }
@@ -51,6 +58,11 @@ public class LogInController {
                 User u = new User(user,pass,new BankAccount("","",50.00));
                 if(admin.addUser(u)){
                     lView.signUpAttempt(true,u);
+
+                    HomePageView hView = new HomePageView(u, admin, queue);
+                    HomePageController control = new HomePageController(queue, u, admin, hView);
+                    lView.dispose();
+                    control.mainLoop();
                 }else{
                     lView.signUpAttempt(false,u);
                 }
