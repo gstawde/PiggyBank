@@ -2,6 +2,7 @@ package Model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /***
  *The Model.User class defines an individual user of the app and stores Model.User data
@@ -108,7 +109,7 @@ public class User implements Comparable<User>, Serializable {
      * getter for Model.Transaction History
      * @return transactionHistory
      */
-    public ArrayList<Transaction> getTransactionHistory() {
+    public LinkedList<Transaction> getTransactionHistory() {
         return transactionHistory.getTransactionHistoryList();
     }
 

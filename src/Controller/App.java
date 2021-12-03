@@ -20,6 +20,7 @@ public class App {
         start.mainLoop();
     }
 
+
     public void populateAdmin(){
         User s = new User("s","a",new BankAccount("s","a",50));
         User a = new User("a","a",new BankAccount("s","a",50));
