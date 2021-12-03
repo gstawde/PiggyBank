@@ -17,12 +17,12 @@ public class Admin {
     //Methods
 
     /***
-     * Adds Model.User "u" to HashMap with Model.User "u"'s username
+     * Adds Model.User "u" to HashMap with Model.User "u"'s username or if the username is blank
      * @param u
      * @return True if added, false if not
      */
     public boolean addUser(User u){
-        if(this.usernameToUser.containsKey(u.getUsername())) {
+        if(this.usernameToUser.containsKey(u.getUsername()) || u.getUsername().length() == 0) {
             System.out.println("Model.User with this username already exists");
             return false;
         }
@@ -67,8 +67,6 @@ public class Admin {
      * @return this.HashSet
      */
     public HashSet<User> getUserList(){return this.userList;}
-
-
 
 }
 //Shivam Amin | shivamamin4@gmail.com

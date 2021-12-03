@@ -14,73 +14,81 @@ public class LogInView extends JFrame{
     final Color background = Color.decode("#272727");
     final Color accentPink = Color.decode("#E6BEAE");
     final Font titleText = new Font("Modern No. 20", Font.PLAIN, 30);
+    final Font paragraphText = new Font("Modern No. 20", Font.PLAIN, 16);
 
-
+    //Instance Variables
     public Admin a;
     public JTextField username;
     public JTextField password;
     public JLabel title;
     public JButton signin;
     public JButton signup;
-    public JLabel fail;
-    public JLabel fail2;
+    public JLabel failSignIn;
+    public JLabel failSignUp;
 
+    //Constructor
     public LogInView(Admin a, BlockingQueue<Message> queue){
-        this.getContentPane().setBackground(background);
-        this.setSize(500, 500);
-
-
         this.a = a;
-        //this.setLocation(0,0);
+
+        //Set Background
+        this.getContentPane().setBackground(background);
+
+        //Set Size of page
         this.setSize(500, 500);
+
+        //Set Close Operation
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setDefaultLookAndFeelDecorated(true);
 
-
+        //Initialize all of the Labels, textFields, and buttons
         title = new JLabel("Login");
-        title.setBounds((this.getWidth()-75)/2, 20, 150, 25);
-        title.setSize(150,25);
-        title.setForeground(accentPink);
-        title.setFont(titleText);
-        this.add(title);
-        //setLocationRelativeTo(null);
-
-
-
         username = new JTextField("Username");
-        username.setBounds(175, 100, 150, 25);
-        username.setBackground(accentPink);
-
         password = new JTextField("Password");
-        password.setBounds(175, 200, 150, 25);
-        password.setBackground(accentPink);
-
         signin = new JButton("Sign In");
-        signin.setBounds(200,300,100,25);
-        signin.setBackground(accentPink);
-
         signup = new JButton("Sign Up");
+        failSignIn =new JLabel("Sign In Failed");
+        failSignUp =new JLabel("Username Already Exists/Invalid");
+
+        //Set Bounds of all elememts
+        title.setBounds((this.getWidth()-75)/2, 20, 150, 25);
+        username.setBounds(175, 100, 150, 25);
+        password.setBounds(175, 200, 150, 25);
+        signin.setBounds(200,300,100,25);
         signup.setBounds(200,350,100,25);
+        failSignIn.setBounds(215,400,100,25);
+        failSignUp.setBounds(150,400,300,25);
+
+
+        //Set Color of all Elements
+        title.setForeground(accentPink);
+        username.setBackground(accentPink);
+        password.setBackground(accentPink);
+        signin.setBackground(accentPink);
         signup.setBackground(accentPink);
+        failSignIn.setForeground(accentPink);
+        failSignUp.setForeground(accentPink);
 
+        //Set fonts for Jlabels
+        title.setFont(titleText);
+        failSignIn.setFont(paragraphText);
+        failSignUp.setFont(paragraphText);
 
+        //Set both of the fail Labels to false for now
+        failSignIn.setVisible(false);
+        failSignUp.setVisible(false);
+
+        //Add all of the JButtons, textFields and Jlabels to the JFrame
+        this.add(title);
         this.add(username);
         this.add(password);
         this.add(signin);
         this.add(signup);
+        this.add(failSignIn);
+        this.add(failSignUp);
 
-        fail =new JLabel("Sign In Failed");
-        fail.setBounds(215,400,100,25);
-        fail.setForeground(accentPink);
-        fail.setVisible(false);
-        this.add(fail);
-
-        fail2 =new JLabel("Username Already Exists");
-        fail2.setBounds(175,400,300,25);
-        fail2.setForeground(accentPink);
-        fail2.setVisible(false);
-        this.add(fail2);
-
+        /***
+         * Action listener for the signin button
+         * Whenever it is pressed it sends the queue a message saying that sign in was attempted
+         */
         signin.addActionListener(e -> {
             try {
                 queue.put(new SignInMessage("Sign In Attempted"));
@@ -89,7 +97,10 @@ public class LogInView extends JFrame{
             }
         });
 
-
+        /***
+         * Action listener for the signUp button
+         * Whenever it is pressed it sends the queue a message saying that sign up was attempted
+         */
         signup.addActionListener(e -> {
             try {
                 queue.put(new SignUpMessage("Sign Up Attempted"));
@@ -98,29 +109,28 @@ public class LogInView extends JFrame{
             }
         });
 
-
+        //Make the layout null and set the jframe visible
         this.setLayout(null);
         this.setVisible(true);
 
     }
 
-    public void logInAttempt(boolean success){
-
-        if(!success){
-            this.fail.setVisible(true);
-            this.fail2.setVisible(false);
-        }
+    /***
+     * Method is called from the login controller, if there is an invalid log in attempted
+     */
+    public void logInFail(){
+        //Make the signin Jlabel visible and hide the signup jlabel if it was already open
+        this.failSignIn.setVisible(true);
+        this.failSignUp.setVisible(false);
     }
 
-    public void signUpAttempt(boolean success){
-        if(!success){
-            this.fail2.setVisible(true);
-            this.fail.setVisible(false);
-        }
+    /***
+     * Method is called from the login controller, if there is an invalid sign up attempted
+     */
+    public void signUpFail(){
+        //Make the signup Jlabel visible and hide the signin jlabel if it was already open
+        this.failSignUp.setVisible(true);
+        this.failSignIn.setVisible(false);
     }
-
-   /* public static void main(String[] a){
-        Admin admin = new Admin();
-        new LogInView(admin, new LinkedBlockingQueue());
-    }*/
 }
+//Shivam Amin | shivamamin4@gmail.com
