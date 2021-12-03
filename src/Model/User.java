@@ -33,7 +33,7 @@ public class User implements Comparable<User>, Serializable {
      * @param recipient
      */
     public boolean payUser(double amount, User recipient) {
-        if(this.bankAccount.getBalance() < amount){
+        if(this.bankAccount.getBalance() < amount || amount <= 0){
             return false;
         }
         recipient.bankAccount.updateBalance(amount);
