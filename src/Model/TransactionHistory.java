@@ -1,17 +1,20 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class TransactionHistory {
-    public ArrayList<Transaction> transactionHistoryList;
+
+
+    public LinkedList<Transaction> transactionHistoryList;
     public TransactionHistory(){
-        this.transactionHistoryList = new ArrayList<>();
+        this.transactionHistoryList = new LinkedList<>();
     }
-    public ArrayList<Transaction> getTransactionHistoryList(){
+    public LinkedList<Transaction> getTransactionHistoryList(){
         return  this.transactionHistoryList;
     }
-    public boolean add(Transaction t){
-        return this.transactionHistoryList.add(t);
+    public void add(Transaction t){
+        transactionHistoryList.add(0,t);
     }
     public TransactionsIterator getTransactions(){
         return new TransactionsIterator() {
