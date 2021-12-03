@@ -5,7 +5,6 @@ import java.util.concurrent.BlockingQueue;
 
 import Controller.Messages.*;
 import Controller.Messages.RequestOrTransferMessage;
-import Model.*;
 
 public class SettingsView extends JFrame
 {
@@ -13,18 +12,18 @@ public class SettingsView extends JFrame
    private JLabel bankAccInfoLabel;
    private JLabel userNameLabel;
    private JLabel bankBalanceLabel;
-   public JLabel updateNameSuccess;
-   public JLabel updateNameFail;
-   public JLabel updatePasswordSuccess;
-   public JLabel updatePasswordFail;
-   public JLabel deleteSuccess;
-   public JLabel deleteFail;
-   public JButton updateNameButton;
-   public JButton updatePasswordButton;
-   public JButton deleteAccountButton;
-   public JButton logOutButton;
-   public JTextField updateNameText;
-   public JPasswordField passwordText;
+   private JLabel updateNameSuccess;
+   private JLabel updateNameFail;
+   private JLabel updatePasswordSuccess;
+   private JLabel updatePasswordFail;
+   private JLabel deleteSuccess;
+   private JLabel deleteFail;
+   private JButton updateNameButton;
+   private JButton updatePasswordButton;
+   private JButton deleteAccountButton;
+   private JButton logOutButton;
+   private JTextField updateNameText;
+   private JPasswordField passwordText;
    private JButton requestOrTransfer;
    private JButton homePage;
 
@@ -32,13 +31,11 @@ public class SettingsView extends JFrame
 
    final Color background = Color.decode("#272727");
    final Color accentPink = Color.decode("#E6BEAE");
-   final Color genericText = Color.decode("#FFFFFF");
-   final Color accentBlue = Color.decode("#A9BCD0");
    final Font paragraphText = new Font("Modern No. 20", Font.PLAIN, 16);
    final Font titleText = new Font("Modern No. 20", Font.PLAIN, 30);
    final Font headerText = new Font("Modern No. 20", Font.PLAIN, 20);
 
-   public SettingsView(BlockingQueue<Message> queue, String username, double balance, Admin admin)
+   public SettingsView(BlockingQueue<Message> queue, String username, double balance)
    {
        this.queue = queue;
 
@@ -215,12 +212,8 @@ public class SettingsView extends JFrame
        this.add(requestOrTransfer);
        this.add(homePage);
 
-     //  System.out.println("1");
-     //  MenuView mv = new MenuView(this,user,queue,admin);
-
        this.setLayout(null);
        this.setVisible(true);
-       System.out.println("2");
    }
 
    public void updateNameSuccessFail(boolean val,String str)
@@ -265,13 +258,4 @@ public class SettingsView extends JFrame
             this.deleteSuccess.setVisible(false);
         }
     }
-
-   /*
-   public static void main(String[] args)
-   {
-       User user = new User("Jun Wu", "abc", new BankAccount("Jun", "Wu", 500));
-       new SettingsView(user.getUsername(), user.getBankAccount().getBalance());
-   }
-
-    */
 }
