@@ -22,7 +22,7 @@ public class Admin {
      * @return True if added, false if not
      */
     public boolean addUser(User u){
-        if(this.usernameToUser.containsKey(u.getUsername()) || u.getUsername().length() == 0) {
+        if(this.usernameToUser.containsKey(u.getUsername()) || u.getUsername().length() == 0 || u.getPassword().length() == 0) {
             System.out.println("Model.User with this username already exists");
             return false;
         }

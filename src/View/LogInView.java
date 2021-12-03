@@ -46,7 +46,7 @@ public class LogInView extends JFrame{
         signin = new JButton("Sign In");
         signup = new JButton("Sign Up");
         failSignIn =new JLabel("Sign In Failed");
-        failSignUp =new JLabel("Username Already Exists/Invalid");
+        failSignUp =new JLabel("User info Already Exists/Invalid");
 
         //Set Bounds of all elememts
         title.setBounds((this.getWidth()-75)/2, 20, 150, 25);
