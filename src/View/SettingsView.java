@@ -6,6 +6,9 @@ import java.util.concurrent.BlockingQueue;
 import Controller.Messages.*;
 import Controller.Messages.RequestOrTransferMessage;
 
+/**
+ * Represent the view of setting page
+ */
 public class SettingsView extends JFrame
 {
    private JLabel settingLabel;
@@ -29,6 +32,7 @@ public class SettingsView extends JFrame
 
    private BlockingQueue<Message> queue;
 
+   //Page styling
    final Color background = Color.decode("#272727");
    final Color accentPink = Color.decode("#E6BEAE");
    final Font paragraphText = new Font("Modern No. 20", Font.PLAIN, 16);
@@ -39,31 +43,20 @@ public class SettingsView extends JFrame
    {
        this.queue = queue;
 
+       //Basic page settings
        this.setLocation(0,0);
-       this.setSize(600,600);
+       this.setSize(500,500);
        this.getContentPane().setBackground(background);
        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        this.setDefaultLookAndFeelDecorated(true);
 
-       requestOrTransfer = new JButton("Transfer");
-       requestOrTransfer.setBounds(0,0,250,40);
-       requestOrTransfer.setBackground(accentPink);
-       requestOrTransfer.setFont(titleText);
-
-       requestOrTransfer.addActionListener(e -> {
-           try {
-               Message msg = new RequestOrTransferMessage();
-               queue.put(msg);
-           } catch (InterruptedException exception) {
-               // do nothing
-           }
-       });
-
+       //Setting for "Home" button
        homePage = new JButton("Home");
-       homePage.setBounds(450,0,150,40);
+       homePage.setBounds(0,0,150,40);
        homePage.setBackground(accentPink);
        homePage.setFont(titleText);
 
+       //AddctionListener for Home button. Create a HomePageMessage and add to the queue
        homePage.addActionListener(e -> {
            try{
                Message msg = new HomePageMessage();
@@ -73,34 +66,57 @@ public class SettingsView extends JFrame
            }
        });
 
+       //Setting for "Transfer" button
+       requestOrTransfer = new JButton("Transfer");
+       requestOrTransfer.setBounds(0,60,150,40);
+       requestOrTransfer.setBackground(accentPink);
+       requestOrTransfer.setFont(titleText);
+
+       //AddctionListener for Transfer button. Create a RequestOrTransferMessage and add to the queue
+       requestOrTransfer.addActionListener(e -> {
+           try {
+               Message msg = new RequestOrTransferMessage();
+               queue.put(msg);
+           } catch (InterruptedException exception) {
+               // do nothing
+           }
+       });
+
+       //Setting for "Settings" Label
        settingLabel = new JLabel("Settings");
-       settingLabel.setBounds(260, 0, 160,40);
+       settingLabel.setBounds(200, 0, 160,40);
        settingLabel.setFont(titleText);
        settingLabel.setForeground(accentPink);
 
+       //Setting for "Bank Account Information:" label
        bankAccInfoLabel = new JLabel("Bank Account Information:");
-       bankAccInfoLabel.setBounds(10, 60, 230, 40);
+       bankAccInfoLabel.setBounds(10, 120, 230, 40);
        bankAccInfoLabel.setFont(headerText);
        bankAccInfoLabel.setForeground(accentPink);
 
+       //Setting for "User Name" label and print the current username
        userNameLabel = new JLabel("User Name: " + username);
-       userNameLabel.setBounds(170,90,200,35);
+       userNameLabel.setBounds(170,160,200,35);
        userNameLabel.setFont(headerText);
        userNameLabel.setForeground(accentPink);
 
+       //Setting for "Balance" label and print the current balance
        bankBalanceLabel = new JLabel("Balance: $"+ balance);
-       bankBalanceLabel.setBounds(170,130,200,35);
+       bankBalanceLabel.setBounds(170,190,200,35);
        bankBalanceLabel.setFont(headerText);
        bankBalanceLabel.setForeground(accentPink);
 
+       //Setting for "Update User Name" button
        updateNameButton = new JButton("Update User Name");
-       updateNameButton.setBounds(0,190,170,25);
+       updateNameButton.setBounds(0,240,170,25);
        updateNameButton.setFont(paragraphText);
        updateNameButton.setBackground(accentPink);
 
+       //Setting for a test field for user to put the new name
        updateNameText = new JTextField(20);
-       updateNameText.setBounds(180,190,150,25);
+       updateNameText.setBounds(180,240,150,25);
 
+       //AddctionListener for updateName button. Create a UpdateUserNameMessage and add to the queue
        updateNameButton.addActionListener(e -> {
            String str = updateNameText.getText();
            try {
@@ -111,26 +127,31 @@ public class SettingsView extends JFrame
            }
        });
 
+       //Setting for a label to prompt user that name updated
        updateNameSuccess = new JLabel("User Name Updated!");
-       updateNameSuccess.setBounds(340, 190, 170, 25);
+       updateNameSuccess.setBounds(340, 240, 170, 25);
        updateNameSuccess.setFont(paragraphText);
        updateNameSuccess.setForeground(accentPink);
        updateNameSuccess.setVisible(false);
 
+       //Setting for a label to prompt user that update name fail
        updateNameFail = new JLabel("Invalid UserName");
-       updateNameFail.setBounds(340, 190, 170, 25);
+       updateNameFail.setBounds(340, 240, 170, 25);
        updateNameFail.setFont(paragraphText);
        updateNameFail.setForeground(accentPink);
        updateNameFail.setVisible(false);
 
+       //Setting for "Update Password" button
        updatePasswordButton = new JButton("Update Password");
-       updatePasswordButton.setBounds(0,250,170,25);
+       updatePasswordButton.setBounds(0,280,170,25);
        updatePasswordButton.setFont(paragraphText);
        updatePasswordButton.setBackground(accentPink);
 
+       //Setting for a test field for user to put the new password
        passwordText = new JPasswordField(20);
-       passwordText.setBounds(180,250, 150, 25);
+       passwordText.setBounds(180,280, 150, 25);
 
+       //AddctionListener for updatePassword button. Create a UpdatePasswordMessage and add to the queue
        updatePasswordButton.addActionListener(e -> {
            String str = passwordText.getText();
            try {
@@ -141,23 +162,27 @@ public class SettingsView extends JFrame
            }
        });
 
+       //Setting for a label to prompt user that password updated
        updatePasswordSuccess = new JLabel("Password Updated!");
-       updatePasswordSuccess.setBounds(340, 250, 170, 25);
+       updatePasswordSuccess.setBounds(340, 280, 170, 25);
        updatePasswordSuccess.setFont(paragraphText);
        updatePasswordSuccess.setForeground(accentPink);
        updatePasswordSuccess.setVisible(false);
 
+       //Setting for a label to prompt user that update password fail
        updatePasswordFail = new JLabel("Invalid Password");
-       updatePasswordFail.setBounds(340, 250, 170, 25);
+       updatePasswordFail.setBounds(340, 280, 170, 25);
        updatePasswordFail.setFont(paragraphText);
        updatePasswordFail.setForeground(accentPink);
        updatePasswordFail.setVisible(false);
 
+       //Setting for "Delete Account" button
        deleteAccountButton = new JButton("Delete Account");
-       deleteAccountButton.setBounds(0,310, 170,25);
+       deleteAccountButton.setBounds(0,320, 170,25);
        deleteAccountButton.setFont(paragraphText);
        deleteAccountButton.setBackground(accentPink);
 
+       //AddctionListener for deleteAccount button. Create a DeleteAccountMessage and add to the queue
        deleteAccountButton.addActionListener(e -> {
            try {
                Message msg = new DeleteAccountMessage();
@@ -167,23 +192,27 @@ public class SettingsView extends JFrame
            }
        });
 
+       //Setting for a label to prompt user that account deleted
        deleteSuccess = new JLabel("Account Deleted");
-       deleteSuccess.setBounds(350, 310, 170, 25);
+       deleteSuccess.setBounds(350, 320, 170, 25);
        deleteSuccess.setFont(paragraphText);
        deleteSuccess.setForeground(accentPink);
        deleteSuccess.setVisible(false);
 
+       //Setting for a label to prompt user that account delete fail
        deleteFail = new JLabel("Delete Fail");
-       deleteFail.setBounds(350, 310, 170, 25);
+       deleteFail.setBounds(350, 320, 170, 25);
        deleteFail.setFont(paragraphText);
        deleteFail.setForeground(accentPink);
        deleteFail.setVisible(false);
 
+       //Setting for "Log Out" button
        logOutButton = new JButton("Log Out");
-       logOutButton.setBounds(160, 370,150,25);
+       logOutButton.setBounds(170, 380,150,25);
        logOutButton.setFont(paragraphText);
        logOutButton.setBackground(accentPink);
 
+       //AddctionListener for logOut button. Create a LogOutMessage and add to the queue
        logOutButton.addActionListener(e -> {
            try {
                Message msg = new LogOutMessage();
@@ -193,6 +222,7 @@ public class SettingsView extends JFrame
            }
        });
 
+       //Added all the buttons, labels and test fields to the frame
        this.add(settingLabel);
        this.add(bankAccInfoLabel);
        this.add(bankBalanceLabel);
@@ -216,6 +246,11 @@ public class SettingsView extends JFrame
        this.setVisible(true);
    }
 
+    /**
+     * Display updateNameSuccess label if val is true, else display updateNameFail label
+     * @param val
+     * @param str
+     */
    public void updateNameSuccessFail(boolean val,String str)
    {
        if(val)
@@ -231,6 +266,10 @@ public class SettingsView extends JFrame
        }
    }
 
+    /**
+     * Display updatePasswordSuccess label if val is true, else display updatePasswordFail label
+     * @param val
+     */
     public void updatePasswordSuccessFail(boolean val)
     {
         if(val == true)
@@ -245,6 +284,10 @@ public class SettingsView extends JFrame
         }
     }
 
+    /**
+     * Display deleteSuccess label if val is true, else display deleteFail label
+     * @param val
+     */
     public void deleteSuccessFail(boolean val)
     {
         if(val == true)
