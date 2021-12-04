@@ -14,7 +14,6 @@ public class User implements Comparable<User>, Serializable {
     private String password;
     private BankAccount bankAccount;
     private TransactionHistory transactionHistory;
-    private ArrayList<Request> requests;
 
     //constructor
     public User(String username, String password, BankAccount bankAccount){
@@ -22,7 +21,6 @@ public class User implements Comparable<User>, Serializable {
         this. password = password;
         this.bankAccount = bankAccount;
         transactionHistory = new TransactionHistory();
-        requests = new ArrayList<>();
     }
 
     //Methods
@@ -41,28 +39,6 @@ public class User implements Comparable<User>, Serializable {
         transactionHistory.add(new Transaction(recipient,this,amount));
         recipient.transactionHistory.add(new Transaction(recipient,this,amount));
         return true;
-    }
-
-    /***
-     * Fulfill a request and delete it from your list of requests
-     * @param request
-     * @return
-     */
-    public boolean fulfillRequest(Request request){
-        if(payUser(request.getAmount(), request.getRequester())){
-            return this.requests.remove(request);
-        }else{
-            return false;
-        }
-    }
-
-    /***
-     * Requests from Model.User sender the amount of money
-     * @param amount
-     * @param sender
-     */
-    public void requestFromUser(double amount, User sender) {
-        sender.requests.add(new Request(amount, this, sender));
     }
 
     /***
@@ -116,15 +92,6 @@ public class User implements Comparable<User>, Serializable {
     public TransactionsIterator getTransactionIterator() {
         return transactionHistory.getTransactions();
     }
-
-    /***
-     * getter for requests
-     * @return requests
-     */
-    public ArrayList<Request> getRequests() {
-        return requests;
-    }
-
 
     /***
      * compare user to another user to store in list

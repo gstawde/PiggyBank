@@ -6,7 +6,6 @@ import View.*;
 
 import java.util.Iterator;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Controller class for the setting page, communicate with SettingView using message and queue
@@ -106,10 +105,10 @@ public class SettingsController {
             }
 
             //Transfer button was clicked, go to Transfer page by calling RequestTransferController
-            else if(message.getClass() == RequestOrTransferMessage.class)
+            else if(message.getClass() == TransferPageMessage.class)
             {
-                RequestTransferView RTview = new RequestTransferView(queue);
-                RequestTransferController RTcontroller = new RequestTransferController(queue,admin,user,RTview);
+                TransferView RTview = new TransferView(queue);
+                TransferController RTcontroller = new TransferController(queue,admin,user,RTview);
                 settingsView.dispose();
                 RTcontroller.mainLoop();
             }

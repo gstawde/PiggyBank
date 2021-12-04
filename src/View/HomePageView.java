@@ -18,7 +18,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 
 import Controller.Messages.Message;
-import Controller.Messages.RequestOrTransferMessage;
+import Controller.Messages.TransferPageMessage;
 import Controller.Messages.SettingsPageMessage;
 import Model.*;
 
@@ -30,7 +30,7 @@ public class HomePageView extends JFrame{
     JLabel transactionsSummary;
     JScrollPane sp;
     JButton settings;
-    JButton requestOrTransfer;
+    JButton TransferPage;
 
     // BASIC PAGE STYLING
     final Color background = Color.decode("#272727");
@@ -55,14 +55,14 @@ public class HomePageView extends JFrame{
 
         //MenuView mv = new MenuView(this,user,queue,admin);
 
-        requestOrTransfer = new JButton("Transfer");
+        TransferPage = new JButton("Transfer");
         //requestOrTransfer.setBounds(0,0,250,40);
-        requestOrTransfer.setBackground(accentPink);
-        requestOrTransfer.setFont(titleText);
+        TransferPage.setBackground(accentPink);
+        TransferPage.setFont(titleText);
 
-        requestOrTransfer.addActionListener(e -> {
+        TransferPage.addActionListener(e -> {
             try {
-                Message msg = new RequestOrTransferMessage();
+                Message msg = new TransferPageMessage();
                 queue.put(msg);
             } catch (InterruptedException exception) {
                 // do nothing
@@ -83,7 +83,7 @@ public class HomePageView extends JFrame{
             }
         });
 
-        this.add(requestOrTransfer);
+        this.add(TransferPage);
         this.add(settings);
         // spacing:
         this.add(Box.createVerticalStrut(50));

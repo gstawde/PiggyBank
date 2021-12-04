@@ -1,6 +1,5 @@
 
 import Model.BankAccount;
-import Model.Request;
 import Model.Transaction;
 import Model.User;
 import org.junit.jupiter.api.Test;
@@ -31,25 +30,6 @@ public class UserTester{
 
     }
 
-    @Test
-    public void requestUserTest() {
-        User ab = new User("ab", "123", new BankAccount("a","b",100));
-        User cd = new User("cd", "123", new BankAccount("c","d",100));
-
-        ab.requestFromUser(50,cd);
-        Request req = new Request(50,ab,cd);
-        assertTrue(req.equals(cd.getRequests().get(0)), "should return true" );
-
-    }
-
-    @Test
-    public void fulfillRequestTest(){
-        User ab = new User("ab", "123", new BankAccount("a","b",100));
-        User cd = new User("cd", "123", new BankAccount("c","d",100));
-        ab.requestFromUser(50,cd);
-        assertTrue(cd.fulfillRequest(cd.getRequests().get(0)), "should return true" );
-        assertTrue(cd.getRequests().isEmpty(), "Requests should be empty");
-    }
 
     @Test
     public void equalsUserTest() {
@@ -100,13 +80,6 @@ public class UserTester{
         assertTrue(result, "should return true");
     }
 
-    @Test
-    public void getRequestsTest() {
-        User ab = new User("ab", "123", new BankAccount("a","b",100));
-        User cd = new User("cd", "123", new BankAccount("c","d",100));
-        ab.requestFromUser(50,cd);
-        assertTrue(cd.getRequests().get(0).equals(new Request(50,ab,cd)), "should return true");
-    }
 
 
 }

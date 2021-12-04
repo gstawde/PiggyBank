@@ -29,8 +29,7 @@
 - [x] Create README  
 - [x] Create Model.Admin class  
 - [x] Create Model.User class  
-- [x] Create Model.Transaction class  
-- [x] Create Model.Request class  
+- [x] Create Model.Transaction class   
 - [x] Create Model.BankAccount class  
 - [x] Finalize attribute names for all classes  
 - [x] Finalize method names for all classes  

@@ -6,7 +6,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.concurrent.BlockingQueue;
 
-public class RequestTransferView extends JFrame {
+/**
+ * Represents TransferView page
+ */
+public class TransferView extends JFrame {
+    //instance variables
     public JLabel title;
     public JLabel success;
     public JLabel invalidAmount;
@@ -14,10 +18,9 @@ public class RequestTransferView extends JFrame {
     public JLabel insufficientFunds;
     public JTextField username;
     public JTextField amount;
-    public JButton request;
     public JButton transfer;
-    JButton settings;
-    JButton homePage;
+    public JButton settings;
+    public JButton homePage;
 
     // BASIC PAGE STYLING
     final Color background = Color.decode("#272727");
@@ -30,7 +33,8 @@ public class RequestTransferView extends JFrame {
 
     private BlockingQueue<Message> queue;
 
-    public RequestTransferView(BlockingQueue<Message> queue) {
+
+    public TransferView(BlockingQueue<Message> queue) {
         this.setLocation(0, 0);
         // BASIC PAGE STYLING
         this.getContentPane().setBackground(background);
@@ -38,11 +42,13 @@ public class RequestTransferView extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setDefaultLookAndFeelDecorated(true);
 
+        //Title label settings
         title = new JLabel("Transfer");
         title.setBounds(200, 10, 250, 25);
         title.setFont(titleText);
         title.setForeground(accentPink);
 
+        //homePage button settings
         homePage = new JButton("Home");
         homePage.setBounds(0,0,150,40);
         homePage.setBackground(accentPink);
@@ -57,6 +63,7 @@ public class RequestTransferView extends JFrame {
             }
         });
 
+        //settings button settings
         settings = new JButton("Setting");
         settings.setBounds(0,80,150,40);
         settings.setBackground(accentPink);
@@ -72,7 +79,7 @@ public class RequestTransferView extends JFrame {
         });
 
 
-
+        //various label settings
         success = new JLabel("Process Success");
         success.setBounds(175, 50, 150, 25);
         success.setVisible(false);
@@ -85,15 +92,19 @@ public class RequestTransferView extends JFrame {
         amount = new JTextField("Amount");
         amount.setBounds(175, 150, 150, 25);
 
-        request = new JButton("Request");
-        request.setBounds(175, 250, 150, 25);
-        request.setBackground(accentPink);
-        request.setFont(headerText);
-
         transfer = new JButton("Transfer");
         transfer.setBounds(175, 300, 150, 25);
         transfer.setBackground(accentPink);
         transfer.setFont(headerText);
+        //transfer button action
+        transfer.addActionListener(e -> {
+            try {
+                Message msg = new TransferMessage(username.getText(), amount.getText());
+                queue.put(msg);
+            } catch (InterruptedException exception) {
+                // do nothing
+            }
+        });
 
         invalidUserName = new JLabel("Invalid UserName");
         invalidUserName.setBounds(175, 50, 150, 25);
@@ -113,45 +124,21 @@ public class RequestTransferView extends JFrame {
         insufficientFunds.setFont(headerText);
         insufficientFunds.setForeground(accentPink);
 
+        //add elements to Frame
         this.add(title);
         this.add(success);
         this.add(username);
         this.add(amount);
-        //this.add(request);
         this.add(transfer);
         this.add(invalidUserName);
         this.add(invalidAmount);
         this.add(insufficientFunds);
         this.add(settings);
         this.add(homePage);
-      //  MenuView mv = new MenuView(this,u,queue,a);
 
         this.setLayout(null);
         this.setVisible(true);
-
-        //request button action
-        request.addActionListener(e -> {
-            try {
-                Message msg = new RequestMessage(username.getText(), amount.getText());
-                queue.put(msg);
-            } catch (InterruptedException exception) {
-                // do nothing
-            }
-        });
-        //transfer button action
-        transfer.addActionListener(e -> {
-            try {
-                Message msg = new TransferMessage(username.getText(), amount.getText());
-                queue.put(msg);
-            } catch (InterruptedException exception) {
-                // do nothing
-            }
-        });
     }
-    /*
-    public static void main(String[] args) {
-        BlockingQueue<Message> queue = new LinkedBlockingQueue<>();
-        new RequestTransferView(queue,);
-    }*/
+
 }
 //Chint Patel | patelchint2002@gmail.com
