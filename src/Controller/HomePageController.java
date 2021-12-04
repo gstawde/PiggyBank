@@ -1,12 +1,12 @@
 package Controller;
 
 import Controller.Messages.Message;
-import Controller.Messages.RequestOrTransferMessage;
+import Controller.Messages.TransferPageMessage;
 import Controller.Messages.SettingsPageMessage;
 import Model.Admin;
 import Model.User;
 import View.HomePageView;
-import View.RequestTransferView;
+import View.TransferView;
 import View.SettingsView;
 
 import java.util.concurrent.BlockingQueue;
@@ -35,12 +35,12 @@ public class HomePageController
                 // do nothing
             }
 
-            if(message.getClass() == RequestOrTransferMessage.class)
+            if(message.getClass() == TransferPageMessage.class)
             {
-                RequestTransferView RTview = new RequestTransferView(queue);
-                RequestTransferController RTcontroller = new RequestTransferController(queue,admin,user,RTview);
+                TransferView transferView = new TransferView(queue);
+                TransferController transferController = new TransferController(queue,admin,user,transferView);
                 homeView.dispose();
-                RTcontroller.mainLoop();
+                transferController.mainLoop();
             }
 
             else if(message.getClass() == SettingsPageMessage.class)

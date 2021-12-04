@@ -4,7 +4,7 @@ import java.awt.*;
 import java.util.concurrent.BlockingQueue;
 
 import Controller.Messages.*;
-import Controller.Messages.RequestOrTransferMessage;
+import Controller.Messages.TransferPageMessage;
 
 /**
  * Represent the view of setting page
@@ -27,7 +27,7 @@ public class SettingsView extends JFrame
    private JButton logOutButton;
    private JTextField updateNameText;
    private JPasswordField passwordText;
-   private JButton requestOrTransfer;
+   private JButton TransferPage;
    private JButton homePage;
 
    private BlockingQueue<Message> queue;
@@ -67,15 +67,15 @@ public class SettingsView extends JFrame
        });
 
        //Setting for "Transfer" button
-       requestOrTransfer = new JButton("Transfer");
-       requestOrTransfer.setBounds(0,60,150,40);
-       requestOrTransfer.setBackground(accentPink);
-       requestOrTransfer.setFont(titleText);
+       TransferPage = new JButton("Transfer");
+       TransferPage.setBounds(0,60,150,40);
+       TransferPage.setBackground(accentPink);
+       TransferPage.setFont(titleText);
 
-       //AddctionListener for Transfer button. Create a RequestOrTransferMessage and add to the queue
-       requestOrTransfer.addActionListener(e -> {
+       //AddctionListener for Transfer button. Create a TransferMessage and add to the queue
+       TransferPage.addActionListener(e -> {
            try {
-               Message msg = new RequestOrTransferMessage();
+               Message msg = new TransferPageMessage();
                queue.put(msg);
            } catch (InterruptedException exception) {
                // do nothing
@@ -239,7 +239,7 @@ public class SettingsView extends JFrame
        this.add(deleteSuccess);
        this.add(deleteFail);
        this.add(logOutButton);
-       this.add(requestOrTransfer);
+       this.add(TransferPage);
        this.add(homePage);
 
        this.setLayout(null);
