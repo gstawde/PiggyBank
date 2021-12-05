@@ -15,6 +15,7 @@ public class LogInView extends JFrame{
     final Color accentPink = Color.decode("#E6BEAE");
     final Font titleText = new Font("Modern No. 20", Font.PLAIN, 30);
     final Font paragraphText = new Font("Modern No. 20", Font.PLAIN, 16);
+    final Color accentBlue = Color.decode("#A9BCD0");
 
     //Instance Variables
     public Admin a;
@@ -60,8 +61,8 @@ public class LogInView extends JFrame{
 
         //Set Color of all Elements
         title.setForeground(accentPink);
-        username.setBackground(accentPink);
-        password.setBackground(accentPink);
+        username.setBackground(accentBlue);
+        password.setBackground(accentBlue);
         signin.setBackground(accentPink);
         signup.setBackground(accentPink);
         failSignIn.setForeground(accentPink);

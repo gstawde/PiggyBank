@@ -42,15 +42,9 @@ public class TransferView extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setDefaultLookAndFeelDecorated(true);
 
-        //Title label settings
-        title = new JLabel("Transfer");
-        title.setBounds(200, 10, 250, 25);
-        title.setFont(titleText);
-        title.setForeground(accentPink);
-
         //homePage button settings
         homePage = new JButton("Home");
-        homePage.setBounds(0,0,150,40);
+        homePage.setBounds(99,10,150,40);
         homePage.setBackground(accentPink);
         homePage.setFont(titleText);
 
@@ -64,8 +58,8 @@ public class TransferView extends JFrame {
         });
 
         //settings button settings
-        settings = new JButton("Setting");
-        settings.setBounds(0,80,150,40);
+        settings = new JButton("Settings");
+        settings.setBounds(251,10,150,40);
         settings.setBackground(accentPink);
         settings.setFont(titleText);
 
@@ -78,22 +72,30 @@ public class TransferView extends JFrame {
             }
         });
 
+        //Title label settings
+        title = new JLabel("Transfer");
+        title.setBounds(200, 65, 250, 25);
+        title.setFont(titleText);
+        title.setForeground(accentPink);
+
 
         //various label settings
         success = new JLabel("Process Success");
-        success.setBounds(175, 50, 150, 25);
+        success.setBounds(186, 95, 150, 25);
         success.setVisible(false);
         success.setFont(headerText);
-        success.setForeground(accentPink);
+        success.setForeground(genericText);
 
         username = new JTextField("Username");
-        username.setBounds(175, 100, 150, 25);
+        username.setBounds(175, 130, 150, 25);
+        username.setBackground(accentBlue);
 
         amount = new JTextField("Amount");
-        amount.setBounds(175, 150, 150, 25);
+        amount.setBounds(175, 180, 150, 25);
+        amount.setBackground(accentBlue);
 
         transfer = new JButton("Transfer");
-        transfer.setBounds(175, 300, 150, 25);
+        transfer.setBounds(175, 225, 150, 25);
         transfer.setBackground(accentPink);
         transfer.setFont(headerText);
         //transfer button action
@@ -107,25 +109,24 @@ public class TransferView extends JFrame {
         });
 
         invalidUserName = new JLabel("Invalid UserName");
-        invalidUserName.setBounds(175, 50, 150, 25);
+        invalidUserName.setBounds(186, 95, 150, 25);
         invalidUserName.setVisible(false);
         invalidUserName.setFont(headerText);
-        invalidUserName.setForeground(accentPink);
+        invalidUserName.setForeground(genericText);
 
         invalidAmount = new JLabel("Invalid Amount");
-        invalidAmount.setBounds(175, 50, 150, 25);
+        invalidAmount.setBounds(186, 95, 150, 25);
         invalidAmount.setVisible(false);
         invalidAmount.setFont(headerText);
-        invalidAmount.setForeground(accentPink);
+        invalidAmount.setForeground(genericText);
 
         insufficientFunds = new JLabel("Insufficient Funds");
-        insufficientFunds.setBounds(175, 50, 250, 25);
+        insufficientFunds.setBounds(186, 95, 150, 25);
         insufficientFunds.setVisible(false);
         insufficientFunds.setFont(headerText);
-        insufficientFunds.setForeground(accentPink);
+        insufficientFunds.setForeground(genericText);
 
         //add elements to Frame
-        this.add(title);
         this.add(success);
         this.add(username);
         this.add(amount);
@@ -135,6 +136,7 @@ public class TransferView extends JFrame {
         this.add(insufficientFunds);
         this.add(settings);
         this.add(homePage);
+        this.add(title);
 
         this.setLayout(null);
         this.setVisible(true);

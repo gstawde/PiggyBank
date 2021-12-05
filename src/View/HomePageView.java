@@ -69,7 +69,7 @@ public class HomePageView extends JFrame{
             }
         });
 
-        settings = new JButton("Setting");
+        settings = new JButton("Settings");
        // settings.setBounds(0,0,150,40);
         settings.setBackground(accentPink);
         settings.setFont(titleText);
@@ -85,6 +85,7 @@ public class HomePageView extends JFrame{
 
         this.add(TransferPage);
         this.add(settings);
+
         // spacing:
         this.add(Box.createVerticalStrut(50));
 
@@ -129,7 +130,7 @@ public class HomePageView extends JFrame{
         this.add(sp);
         // table styling:
         this.table.getTableHeader().setBackground(background);
-        this.table.getTableHeader().setForeground(accentPink);
+        this.table.getTableHeader().setForeground(accentBlue);
         this.table.getTableHeader().setFont(headerText);
         this.table.setShowGrid(false);
         this.table.setOpaque(true);
