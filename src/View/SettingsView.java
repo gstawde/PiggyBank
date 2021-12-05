@@ -38,8 +38,11 @@ public class SettingsView extends JFrame
    final Font paragraphText = new Font("Modern No. 20", Font.PLAIN, 16);
    final Font titleText = new Font("Modern No. 20", Font.PLAIN, 30);
    final Font headerText = new Font("Modern No. 20", Font.PLAIN, 20);
+   final Color accentBlue = Color.decode("#A9BCD0");
+   final Color genericText = Color.decode("#FFFFFF");
 
-   public SettingsView(BlockingQueue<Message> queue, String username, double balance)
+
+    public SettingsView(BlockingQueue<Message> queue, String username, double balance)
    {
        this.queue = queue;
 
@@ -52,7 +55,7 @@ public class SettingsView extends JFrame
 
        //Setting for "Home" button
        homePage = new JButton("Home");
-       homePage.setBounds(0,0,150,40);
+       homePage.setBounds(85,10,150,40);
        homePage.setBackground(accentPink);
        homePage.setFont(titleText);
 
@@ -68,7 +71,7 @@ public class SettingsView extends JFrame
 
        //Setting for "Transfer" button
        TransferPage = new JButton("Transfer");
-       TransferPage.setBounds(0,60,150,40);
+       TransferPage.setBounds(240,10,150,40);
        TransferPage.setBackground(accentPink);
        TransferPage.setFont(titleText);
 
@@ -84,7 +87,7 @@ public class SettingsView extends JFrame
 
        //Setting for "Settings" Label
        settingLabel = new JLabel("Settings");
-       settingLabel.setBounds(200, 0, 160,40);
+       settingLabel.setBounds(200, 65, 160,40);
        settingLabel.setFont(titleText);
        settingLabel.setForeground(accentPink);
 
@@ -92,19 +95,19 @@ public class SettingsView extends JFrame
        bankAccInfoLabel = new JLabel("Bank Account Information:");
        bankAccInfoLabel.setBounds(10, 120, 230, 40);
        bankAccInfoLabel.setFont(headerText);
-       bankAccInfoLabel.setForeground(accentPink);
+       bankAccInfoLabel.setForeground(genericText);
 
        //Setting for "User Name" label and print the current username
        userNameLabel = new JLabel("User Name: " + username);
        userNameLabel.setBounds(170,160,200,35);
        userNameLabel.setFont(headerText);
-       userNameLabel.setForeground(accentPink);
+       userNameLabel.setForeground(accentBlue);
 
        //Setting for "Balance" label and print the current balance
        bankBalanceLabel = new JLabel("Balance: $"+ balance);
        bankBalanceLabel.setBounds(170,190,200,35);
        bankBalanceLabel.setFont(headerText);
-       bankBalanceLabel.setForeground(accentPink);
+       bankBalanceLabel.setForeground(accentBlue);
 
        //Setting for "Update User Name" button
        updateNameButton = new JButton("Update User Name");
